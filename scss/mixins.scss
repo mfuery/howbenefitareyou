@@ -1,0 +1,37 @@
+@mixin breakpoint($point) {
+  @if $point == desktop {
+    @media (min-width: 1248px) {
+      @content;
+    }
+  }
+  @else if $point == laptop {
+    @media (min-width: 1024px) {
+      @content;
+    }
+  }
+  @else if $point == tablet {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+  @else if $point == mobile {
+    @media (max-width: 767px) {
+      @content;
+    }
+  }
+  @else {
+    @warn "Breakpoint mixin supports: desktop, laptop, tablet, mobile";
+  }
+}
+
+// n is number of stars required
+// c is color of stars
+@function multiple-box-shadow($n, $c) {
+  $value: "#{random(2000)}px #{random(2000)}px #{$c}";
+
+  @for $i from 2 through $n {
+    $value: "#{$value} , #{random(2000)}px #{random(2000)}px #{$c}";
+  }
+
+  @return unquote($value);
+}
