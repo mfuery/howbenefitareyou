@@ -14,7 +14,7 @@ var preloadState = {
     });
 
     //Load your images, spritesheets, bitmaps...
-    game.load.image('boiler-logo', 'assets/img/boilerplate-logo.png');
+    //game.load.image('boiler-logo', 'assets/img/boilerplate-logo.png');
 
     // @todo: Add BadGal image assets here
 
