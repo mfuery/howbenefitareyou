@@ -45,7 +45,7 @@ GameState.prototype = {
 
     // @todo: do gameState create stuff here.
 
-    //this.generateQuestions();
+    this.generateQuestions();
 
     this.asteroids.push(new Asteroid(game, 0, 0));
     this.asteroids.push(new Asteroid(game, 50, 50));
@@ -64,6 +64,13 @@ GameState.prototype = {
     - Creates the score entity
     */
 
+  },
+
+  /**
+   * Generates the random selection of 10 questions for the current round.
+   */
+  generateQuestions: function() {
+    // @todo: Generates the random selection of 10 questions for the current round.
   },
 
   /**
