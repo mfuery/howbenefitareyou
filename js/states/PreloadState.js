@@ -1,7 +1,10 @@
-var preloadState = {
+var PreloadState = function (game) {
+
+};
+
+PreloadState.prototype = {
 
   preload: function () {
-
     /*
     Load all game assets
     Place your load bar, some messages.
@@ -62,7 +65,6 @@ var preloadState = {
   },
 
   create: function () {
-
     game.stage.setBackgroundColor('#000');
     game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
     game.state.start('menu');
