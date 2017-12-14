@@ -3,7 +3,7 @@
     "question": "To cover up dark circles under your eyes, use a concealer a shade ______ than your skin tone.",
     "answers": [
       {
-        "text": "Lighter ",
+        "text": "Lighter",
         "score": 1
       },
       {
@@ -20,7 +20,7 @@
     "question": "Mascara should be replaced every _____.",
     "answers": [
       {
-        "text": "3 months ",
+        "text": "3 months",
         "score": 1
       },
       {
@@ -50,7 +50,7 @@
     "question": "Which of these products can be used to correct undereye color?",
     "answers": [
       {
-        "text": "Little Correctors Set https://www.benefitcosmetics.com/uk/en-gb/product/lifes-little-correctors ",
+        "text": "Little Correctors Set https://www.benefitcosmetics.com/uk/en-gb/product/lifes-little-correctors",
         "score": 1
       },
       {
@@ -71,7 +71,7 @@
     "question": "Where is the best place to test foundation?",
     "answers": [
       {
-        "text": "Jaw ",
+        "text": "Jaw",
         "score": 1
       },
       {
@@ -92,7 +92,7 @@
     "question": "What product would you use to make a \"winged\" eye look?",
     "answers": [
       {
-        "text": "they're real! gel eyeliner pen ",
+        "text": "they're real! gel eyeliner pen",
         "score": 1
       },
       {
@@ -117,7 +117,7 @@
         "score": 0
       },
       {
-        "text": "Between eyebrows ",
+        "text": "Between eyebrows",
         "score": 1
       },
       {
@@ -142,7 +142,7 @@
         "score": 0
       },
       {
-        "text": "hoola bronzer ",
+        "text": "hoola bronzer",
         "score": 1
       }
     ]
@@ -150,38 +150,29 @@
   {
     "question": "If you wanted to highlight your \"cupid's bow\", where would you apply makeup?",
     "answers": [
-      
-    ]
-  },
-  {
-    "question": " - Above your lips (correct)",
-    "answers": [
-      
-    ]
-  },
-  {
-    "question": " - Below your lips",
-    "answers": [
-      
-    ]
-  },
-  {
-    "question": " - Cheekbones",
-    "answers": [
-      
-    ]
-  },
-  {
-    "question": " - Jawline",
-    "answers": [
-      
+      {
+        "text": "Jawline",
+        "score": 0
+      },
+      {
+        "text": "Cheekbones",
+        "score": 0
+      },
+      {
+        "text": "Below your lips",
+        "score": 0
+      },
+      {
+        "text": "Above your lips",
+        "score": 1
+      }
     ]
   },
   {
     "question": "The process of lining the waterline of the eye with dark liner is called:",
     "answers": [
       {
-        "text": "Tightlining ",
+        "text": "Tightlining",
         "score": 1
       },
       {
@@ -202,7 +193,7 @@
     "question": "You should put mascara on ____ you use an eyelash curler.",
     "answers": [
       {
-        "text": "After ",
+        "text": "After",
         "score": 1
       },
       {
@@ -219,7 +210,7 @@
     "question": "What's the best type of brush for GALifornia powder blush?",
     "answers": [
       {
-        "text": "Large, sweeping brush ",
+        "text": "Large, sweeping brush",
         "score": 1
       },
       {
@@ -240,7 +231,7 @@
     "question": "The POREfessional: agent zero shine could be used in your T Zone for what?",
     "answers": [
       {
-        "text": "To reduce oily appearance ",
+        "text": "To reduce oily appearance",
         "score": 1
       },
       {
@@ -261,7 +252,7 @@
     "question": "Using stay don't stray eyeshadow primer can help your eyeshadow stay looking fresh longer.",
     "answers": [
       {
-        "text": "True ",
+        "text": "True",
         "score": 1
       },
       {
@@ -286,7 +277,7 @@
         "score": 0
       },
       {
-        "text": "Shadow ",
+        "text": "Shadow",
         "score": 1
       }
     ]
@@ -295,7 +286,7 @@
     "question": "This powder gives you a sun-kissed look and adds definition to your face.",
     "answers": [
       {
-        "text": "Hoola Bronzer ",
+        "text": "Hoola Bronzer",
         "score": 1
       },
       {
@@ -329,7 +320,7 @@
     "question": "This tool is essential for maintaining the shape of the eyebrows.",
     "answers": [
       {
-        "text": "Brow grooming tweezers ",
+        "text": "Brow grooming tweezers",
         "score": 1
       },
       {
@@ -354,7 +345,7 @@
         "score": 0
       },
       {
-        "text": "Foundation ",
+        "text": "Foundation",
         "score": 1
       }
     ]
@@ -375,7 +366,7 @@
         "score": 0
       },
       {
-        "text": "sPowder ",
+        "text": "sPowder",
         "score": 1
       }
     ]
@@ -396,7 +387,7 @@
         "score": 0
       },
       {
-        "text": "s“precisely, my brow” Eyebrow Pencil ",
+        "text": "s“precisely, my brow” Eyebrow Pencil",
         "score": 1
       }
     ]
@@ -405,7 +396,7 @@
     "question": "If a product is said to contain non-comedogenics, it will be less likely to do what?",
     "answers": [
       {
-        "text": "Block pores ",
+        "text": "Block pores",
         "score": 1
       },
       {
@@ -418,7 +409,7 @@
     "question": "This is used to keep your make-up pencils in perfect working order.",
     "answers": [
       {
-        "text": "Sharpener ",
+        "text": "Sharpener",
         "score": 1
       },
       {
@@ -431,7 +422,7 @@
     "question": "What is the first product you should use on your face when applying makeup?",
     "answers": [
       {
-        "text": "Primer ",
+        "text": "Primer",
         "score": 1
       },
       {
@@ -452,7 +443,7 @@
     "question": "Why is it important to remove all makeup at the end of the day?",
     "answers": [
       {
-        "text": "So you don't clog your pores ",
+        "text": "So you don't clog your pores",
         "score": 1
       },
       {
