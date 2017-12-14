@@ -62,8 +62,8 @@ PreloadState.prototype = {
     game.load.audio('powerup-1', 'assets/mp3/powerup-1.mp3');
 
     //Load your data, JSON, Querys...
-    //Example: game.load.json('version', 'http://phaser.io/version.json');
-    // @todo: Add BadGal JSON assets here
+    game.load.json('questions', 'assets/json/questions.json');
+
 
   },
 
