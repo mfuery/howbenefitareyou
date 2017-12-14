@@ -5,6 +5,8 @@ var Asteroid = function (game, x, y) {
   //Phaser.Sprite.call(this, game, x, y, "asteroid-3");
 
   game.add.existing(this);
+
+  this.scale.x = this.scale.y = game.canvas.width / gameConfig.baseWidth;
 };
 
 Asteroid.prototype = Object.create(Phaser.Sprite.prototype);

@@ -27,6 +27,9 @@ GameState.prototype = {
    */
   score: 0,
 
+  /**
+   * Instances of the 3-5 asteroids shown on the screen.
+   */
   asteroids: [],
 
   /**
@@ -34,9 +37,11 @@ GameState.prototype = {
    */
   create: function () {
     game.add.plugin(Phaser.Plugin.Debug);
-    game.add.plugin(Phaser.Plugin.Inspector);
+    //game.add.plugin(Phaser.Plugin.Inspector);
     game.add.plugin(PhaserSuperStorage.StoragePlugin);
     game.add.plugin(PhaserInput.Plugin);
+
+
 
     // @todo: do gameState create stuff here.
 
@@ -48,6 +53,8 @@ GameState.prototype = {
     this.asteroids.push(new Asteroid(game, 200, 200));
 
 
+
+
     /* @todo:
     - Happens at State startup. Generates the random selection of questions for the current round.
     - Creates the background
@@ -57,6 +64,13 @@ GameState.prototype = {
     - Creates the score entity
     */
 
+  },
+
+  /**
+   * Move objects when canvas is resized.
+   */
+  resize: function() {
+    console.log('resizing...');
   },
 
   /**
