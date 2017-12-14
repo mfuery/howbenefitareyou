@@ -10,7 +10,9 @@ MenuState.prototype = {
     game.add.plugin(PhaserSuperStorage.StoragePlugin);
     game.add.plugin(PhaserInput.Plugin);
 
-    game.add.image(95, 150, 'boiler-logo');
+    game.add.sprite(95, 150, 'asteroid');
+
+    this.background = game.add.image('outerspace');
   },
 
   /**

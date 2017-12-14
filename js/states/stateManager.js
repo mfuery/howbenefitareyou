@@ -1,10 +1,21 @@
-//var w = 640;
-//var h = 480;
 
-var w = window.innerWidth * window.devicePixelRatio;
-var h = window.innerHeight * window.devicePixelRatio;
+var gameConfig = {
+  width: '100%',//window.innerWidth * window.devicePixelRatio,
+  height: '100%',//window.innerHeight * window.devicePixelRatio,
+  renderer: Phaser.AUTO,
+  antialias: true,
+  multiTexture: true,
+  parent: 'gameContainer',
+  scaleMode: Phaser.ScaleManager.SHOW_ALL
+  // state: {
+  //   boot: BootState,
+  //   preload: PreloadState
+  //   create: create,
+  //   update: update
+  // }
+};
 
-var game = new Phaser.Game(w, h, Phaser.AUTO, 'gameContainer');
+game = new Phaser.Game(gameConfig);
 
 game.state.add('boot', BootState);
 game.state.add('preload', PreloadState);

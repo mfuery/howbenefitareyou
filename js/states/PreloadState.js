@@ -30,7 +30,6 @@ PreloadState.prototype = {
     game.load.image('badgal-bang-closed', 'assets/img/badgal-bang-closed.png');
     game.load.image('badgal-bang-open', 'assets/img/badgal-bang-open.png');
     game.load.image('BANG', 'assets/img/BANG.png');
-    game.load.image('bigbang', 'assets/img/bigbang.mp4');
     game.load.image('buy', 'assets/img/buy.png');
     game.load.image('desert', 'assets/img/desert.png');
     game.load.image('down-arrow', 'assets/img/down-arrow.png');
@@ -53,10 +52,14 @@ PreloadState.prototype = {
     game.load.image('tooltip-formula', 'assets/img/tooltip-formula.png');
     game.load.image('UFO', 'assets/img/UFO.png');
 
+    // Videos
+    game.load.video('bigbang', 'assets/img/bigbang.mp4');
 
-    //Load your sounds, efx, music...
-    //Example: game.load.audio('rockas', 'assets/snd/rockas.wav');
-    // @todo: Add BadGal audio assets here
+    // Load your sounds, efx, music...
+    game.load.audio('explosion-1', 'assets/mp3/explosion-1.mp3');
+    game.load.audio('laser-shoot-1', 'assets/mp3/laser-shoot-1.mp3');
+    game.load.audio('power-2', 'assets/mp3/power-2.mp3');
+    game.load.audio('powerup-1', 'assets/mp3/powerup-1.mp3');
 
     //Load your data, JSON, Querys...
     //Example: game.load.json('version', 'http://phaser.io/version.json');
