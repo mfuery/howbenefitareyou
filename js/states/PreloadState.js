@@ -30,7 +30,6 @@ PreloadState.prototype = {
     game.load.image('badgal-bang-closed', 'assets/img/badgal-bang-closed.png');
     game.load.image('badgal-bang-open', 'assets/img/badgal-bang-open.png');
     game.load.image('BANG', 'assets/img/BANG.png');
-    game.load.image('bigbang', 'assets/img/bigbang.mp4');
     game.load.image('buy', 'assets/img/buy.png');
     game.load.image('desert', 'assets/img/desert.png');
     game.load.image('down-arrow', 'assets/img/down-arrow.png');
@@ -53,6 +52,7 @@ PreloadState.prototype = {
     game.load.image('tooltip-formula', 'assets/img/tooltip-formula.png');
     game.load.image('UFO', 'assets/img/UFO.png');
 
+    game.load.video('bigbang', 'assets/img/bigbang.mp4');
 
     //Load your sounds, efx, music...
     //Example: game.load.audio('rockas', 'assets/snd/rockas.wav');
@@ -67,6 +67,7 @@ PreloadState.prototype = {
   create: function () {
     game.stage.setBackgroundColor('#000');
     game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-    game.state.start('menu');
+    //game.state.start('menu');
+    game.state.start('game');
   }
 };

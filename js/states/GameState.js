@@ -27,6 +27,8 @@ GameState.prototype = {
    */
   score: 0,
 
+  asteroids: [],
+
   /**
    * Generates the display objects and data needed for the current state.
    */
@@ -38,7 +40,12 @@ GameState.prototype = {
 
     // @todo: do gameState create stuff here.
 
-    this.generateQuestions();
+    //this.generateQuestions();
+
+    this.asteroids.push(new Asteroid(game, 0, 0));
+    this.asteroids.push(new Asteroid(game, 50, 50));
+    this.asteroids.push(new Asteroid(game, 100, 100));
+    this.asteroids.push(new Asteroid(game, 200, 200));
 
 
     /* @todo:
