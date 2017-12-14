@@ -10,8 +10,6 @@ MenuState.prototype = {
     game.add.plugin(PhaserSuperStorage.StoragePlugin);
     game.add.plugin(PhaserInput.Plugin);
 
-    game.add.sprite(95, 150, 'asteroid');
-
     this.background = game.add.image('outerspace');
   },
 

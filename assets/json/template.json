@@ -1,0 +1,23 @@
+[
+  {
+    "question": "Which of these places should you not apply Hoola bronzer?",
+    "answers": [
+      {
+        "text": "Jawline",
+        "score": 0
+      },
+      {
+        "text": "Sides of forehead",
+        "score": 0
+      },
+      {
+        "text": "Between eyebrows",
+        "score": 1
+      },
+      {
+        "text": "Under cheekbones",
+        "score": 0
+      }
+    ]
+  }
+]

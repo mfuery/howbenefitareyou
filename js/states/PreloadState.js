@@ -70,6 +70,7 @@ PreloadState.prototype = {
   create: function () {
     game.stage.setBackgroundColor('#000');
     game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-    game.state.start('menu');
+    //game.state.start('menu');
+    game.state.start('game');
   }
 };
