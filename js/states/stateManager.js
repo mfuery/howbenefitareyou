@@ -1,12 +1,15 @@
 
 var gameConfig = {
-  width: '100%',//window.innerWidth * window.devicePixelRatio,
-  height: '100%',//window.innerHeight * window.devicePixelRatio,
+  width: '100%',
+  //width: window.innerWidth * window.devicePixelRatio,
+  height: '100%',
+  //height: window.innerHeight * window.devicePixelRatio,
+  baseWidth: 1000,
   renderer: Phaser.AUTO,
   antialias: true,
   multiTexture: true,
   parent: 'gameContainer',
-  scaleMode: Phaser.ScaleManager.SHOW_ALL
+  scaleMode: Phaser.ScaleManager.NO_SCALE
   // state: {
   //   boot: BootState,
   //   preload: PreloadState
