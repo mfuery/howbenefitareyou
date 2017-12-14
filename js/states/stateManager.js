@@ -6,10 +6,10 @@ var h = window.innerHeight * window.devicePixelRatio;
 
 var game = new Phaser.Game(w, h, Phaser.AUTO, 'gameContainer');
 
-game.state.add('boot', bootState);
-game.state.add('preload', preloadState);
-game.state.add('menu', menuState);
-game.state.add('game', gameState);
-game.state.add('results', resultsState);
+game.state.add('boot', BootState);
+game.state.add('preload', PreloadState);
+game.state.add('menu', MenuState);
+game.state.add('game', GameState);
+game.state.add('results', ResultsState);
 
 game.state.start('boot');
