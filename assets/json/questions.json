@@ -1,107 +1,464 @@
-To cover up dark circles under your eyes, use a concealer a shade ______ than your skin tone.
-- Lighter (correct)
-- Darker
-- Same
-Mascara should be replaced every _____.
-- 3 months (correct)
-- 6 months
-- year
-- 2 years
-TODO: Ask questions about what \"contouring\" is
-- TODO: more choices
-Which of these products can be used to correct undereye color?
-- Little Correctors Set https://www.benefitcosmetics.com/uk/en-gb/product/lifes-little-correctors (correct)
-- boi-ing industrial strength concealer https://www.benefitcosmetics.com/us/en/product/boi-ing-industrial-strength-concealer
-- Lemon Aid https://www.benefitcosmetics.com/us/en/product/lemon-aid
-- benetint cheek & lip stain travel size mini https://www.benefitcosmetics.com/us/en/product/benetint-travel-size-mini
-Where is the best place to test foundation?
-- Jaw (correct)
-- Nose
-- Ears
-- Hand
-What product would you use to make a \"winged\" eye look?
-- they're real! gel eyeliner pen (correct)
-- hoola bronzer
-- TODO: more
-Which of these places should you not apply Hoola bronzer?
-- Jawline
-- Sides of forehead
-- Between eyebrows (correct)
-- Under cheekbones
-Which of these products would NOT give you a \"glowing\" look to your face?
-- high beam
-- watt's up
-- dandelion twinkle
-- hoola bronzer (correct)
-If you wanted to highlight your \"cupid's bow\", where would you apply makeup?
- - Above your lips (correct)
- - Below your lips
- - Cheekbones
- - Jawline
-The process of lining the waterline of the eye with dark liner is called:
-- Tightlining (correct)
-- Wingliner
-- Highlighter
-- Beachfront
-You should put mascara on ____ you use an eyelash curler.
-- After (correct)
-- Before
-- At the same time
-What's the best type of brush for GALifornia powder blush?
-- Large, sweeping brush (correct)
-- Hairbrush
-- Thin, long brush
-- Small, short brush
-The POREfessional: agent zero shine could be used in your T Zone for what?
-- To reduce oily appearance (correct)
-- To contour
-- To find Carmen Sandiego
-- To color correct
-Using stay don't stray eyeshadow primer can help your eyeshadow stay looking fresh longer.
-- True (correct)
-- False
-Which of these products would you probably NOT use on your lips?
-- Gloss
-- Stain
-- Pencil
-- Shadow (correct)
-This powder gives you a sun-kissed look and adds definition to your face.
-- Hoola Bronzer (correct)
-- TODO: other products
-What should you put on your lips if you want all-day color with no upkeep?
-- benetit lip stain
-- lip stick
-- lip gloss
-- lip balm
-This tool is essential for maintaining the shape of the eyebrows.
-- Brow grooming tweezers (correct)
-- TODO: more choices
-Which product creates a flawless complexion and evens out skin tone?
-- Mascara
-- Eyebrow Pencil
-- Blusher
-- Foundation (Correct)
-What product \"sets\" your foundation and helps it last longer?
-- sConcealer
-- sEyebrow Pencil
-- sLipstick
-- sPowder (correct)
-What product helps you define your eyebrows?
-- sEyeliner
-- sMascara
-- sConcealer
-- s“precisely, my brow” Eyebrow Pencil (correct)
-If a product is said to contain non-comedogenics, it will be less likely to do what?
-- Block pores (correct)
-- TODO: more choices
-This is used to keep your make-up pencils in perfect working order.
-- Sharpener (correct)
-- TODO: more choices
-What is the first product you should use on your face when applying makeup?
-- Primer (correct)
-- Bronzer
-- Foundation
-- Blush
-Why is it important to remove all makeup at the end of the day?
-- So you don't clog your pores (correct)
-- TODO: more choices
+[
+  {
+    "question": "To cover up dark circles under your eyes, use a concealer a shade ______ than your skin tone.",
+    "answers": [
+      {
+        "text": "Lighter ",
+        "score": 1
+      },
+      {
+        "text": "Darker",
+        "score": 0
+      },
+      {
+        "text": "Same",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "Mascara should be replaced every _____.",
+    "answers": [
+      {
+        "text": "3 months ",
+        "score": 1
+      },
+      {
+        "text": "6 months",
+        "score": 0
+      },
+      {
+        "text": "year",
+        "score": 0
+      },
+      {
+        "text": "2 years",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "TODO: Ask questions about what \"contouring\" is",
+    "answers": [
+      {
+        "text": "TODO: more choices",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "Which of these products can be used to correct undereye color?",
+    "answers": [
+      {
+        "text": "Little Correctors Set https://www.benefitcosmetics.com/uk/en-gb/product/lifes-little-correctors ",
+        "score": 1
+      },
+      {
+        "text": "boi-ing industrial strength concealer https://www.benefitcosmetics.com/us/en/product/boi-ing-industrial-strength-concealer",
+        "score": 0
+      },
+      {
+        "text": "Lemon Aid https://www.benefitcosmetics.com/us/en/product/lemon-aid",
+        "score": 0
+      },
+      {
+        "text": "benetint cheek & lip stain travel size mini https://www.benefitcosmetics.com/us/en/product/benetint-travel-size-mini",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "Where is the best place to test foundation?",
+    "answers": [
+      {
+        "text": "Jaw ",
+        "score": 1
+      },
+      {
+        "text": "Nose",
+        "score": 0
+      },
+      {
+        "text": "Ears",
+        "score": 0
+      },
+      {
+        "text": "Hand",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "What product would you use to make a \"winged\" eye look?",
+    "answers": [
+      {
+        "text": "they're real! gel eyeliner pen ",
+        "score": 1
+      },
+      {
+        "text": "hoola bronzer",
+        "score": 0
+      },
+      {
+        "text": "TODO: more",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "Which of these places should you not apply Hoola bronzer?",
+    "answers": [
+      {
+        "text": "Jawline",
+        "score": 0
+      },
+      {
+        "text": "Sides of forehead",
+        "score": 0
+      },
+      {
+        "text": "Between eyebrows ",
+        "score": 1
+      },
+      {
+        "text": "Under cheekbones",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "Which of these products would NOT give you a \"glowing\" look to your face?",
+    "answers": [
+      {
+        "text": "high beam",
+        "score": 0
+      },
+      {
+        "text": "watt's up",
+        "score": 0
+      },
+      {
+        "text": "dandelion twinkle",
+        "score": 0
+      },
+      {
+        "text": "hoola bronzer ",
+        "score": 1
+      }
+    ]
+  },
+  {
+    "question": "If you wanted to highlight your \"cupid's bow\", where would you apply makeup?",
+    "answers": [
+      
+    ]
+  },
+  {
+    "question": " - Above your lips (correct)",
+    "answers": [
+      
+    ]
+  },
+  {
+    "question": " - Below your lips",
+    "answers": [
+      
+    ]
+  },
+  {
+    "question": " - Cheekbones",
+    "answers": [
+      
+    ]
+  },
+  {
+    "question": " - Jawline",
+    "answers": [
+      
+    ]
+  },
+  {
+    "question": "The process of lining the waterline of the eye with dark liner is called:",
+    "answers": [
+      {
+        "text": "Tightlining ",
+        "score": 1
+      },
+      {
+        "text": "Wingliner",
+        "score": 0
+      },
+      {
+        "text": "Highlighter",
+        "score": 0
+      },
+      {
+        "text": "Beachfront",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "You should put mascara on ____ you use an eyelash curler.",
+    "answers": [
+      {
+        "text": "After ",
+        "score": 1
+      },
+      {
+        "text": "Before",
+        "score": 0
+      },
+      {
+        "text": "At the same time",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "What's the best type of brush for GALifornia powder blush?",
+    "answers": [
+      {
+        "text": "Large, sweeping brush ",
+        "score": 1
+      },
+      {
+        "text": "Hairbrush",
+        "score": 0
+      },
+      {
+        "text": "Thin, long brush",
+        "score": 0
+      },
+      {
+        "text": "Small, short brush",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "The POREfessional: agent zero shine could be used in your T Zone for what?",
+    "answers": [
+      {
+        "text": "To reduce oily appearance ",
+        "score": 1
+      },
+      {
+        "text": "To contour",
+        "score": 0
+      },
+      {
+        "text": "To find Carmen Sandiego",
+        "score": 0
+      },
+      {
+        "text": "To color correct",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "Using stay don't stray eyeshadow primer can help your eyeshadow stay looking fresh longer.",
+    "answers": [
+      {
+        "text": "True ",
+        "score": 1
+      },
+      {
+        "text": "False",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "Which of these products would you probably NOT use on your lips?",
+    "answers": [
+      {
+        "text": "Gloss",
+        "score": 0
+      },
+      {
+        "text": "Stain",
+        "score": 0
+      },
+      {
+        "text": "Pencil",
+        "score": 0
+      },
+      {
+        "text": "Shadow ",
+        "score": 1
+      }
+    ]
+  },
+  {
+    "question": "This powder gives you a sun-kissed look and adds definition to your face.",
+    "answers": [
+      {
+        "text": "Hoola Bronzer ",
+        "score": 1
+      },
+      {
+        "text": "TODO: other products",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "What should you put on your lips if you want all-day color with no upkeep?",
+    "answers": [
+      {
+        "text": "benetit lip stain",
+        "score": 0
+      },
+      {
+        "text": "lip stick",
+        "score": 0
+      },
+      {
+        "text": "lip gloss",
+        "score": 0
+      },
+      {
+        "text": "lip balm",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "This tool is essential for maintaining the shape of the eyebrows.",
+    "answers": [
+      {
+        "text": "Brow grooming tweezers ",
+        "score": 1
+      },
+      {
+        "text": "TODO: more choices",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "Which product creates a flawless complexion and evens out skin tone?",
+    "answers": [
+      {
+        "text": "Mascara",
+        "score": 0
+      },
+      {
+        "text": "Eyebrow Pencil",
+        "score": 0
+      },
+      {
+        "text": "Blusher",
+        "score": 0
+      },
+      {
+        "text": "Foundation ",
+        "score": 1
+      }
+    ]
+  },
+  {
+    "question": "What product \"sets\" your foundation and helps it last longer?",
+    "answers": [
+      {
+        "text": "sConcealer",
+        "score": 0
+      },
+      {
+        "text": "sEyebrow Pencil",
+        "score": 0
+      },
+      {
+        "text": "sLipstick",
+        "score": 0
+      },
+      {
+        "text": "sPowder ",
+        "score": 1
+      }
+    ]
+  },
+  {
+    "question": "What product helps you define your eyebrows?",
+    "answers": [
+      {
+        "text": "sEyeliner",
+        "score": 0
+      },
+      {
+        "text": "sMascara",
+        "score": 0
+      },
+      {
+        "text": "sConcealer",
+        "score": 0
+      },
+      {
+        "text": "s“precisely, my brow” Eyebrow Pencil ",
+        "score": 1
+      }
+    ]
+  },
+  {
+    "question": "If a product is said to contain non-comedogenics, it will be less likely to do what?",
+    "answers": [
+      {
+        "text": "Block pores ",
+        "score": 1
+      },
+      {
+        "text": "TODO: more choices",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "This is used to keep your make-up pencils in perfect working order.",
+    "answers": [
+      {
+        "text": "Sharpener ",
+        "score": 1
+      },
+      {
+        "text": "TODO: more choices",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "What is the first product you should use on your face when applying makeup?",
+    "answers": [
+      {
+        "text": "Primer ",
+        "score": 1
+      },
+      {
+        "text": "Bronzer",
+        "score": 0
+      },
+      {
+        "text": "Foundation",
+        "score": 0
+      },
+      {
+        "text": "Blush",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "question": "Why is it important to remove all makeup at the end of the day?",
+    "answers": [
+      {
+        "text": "So you don't clog your pores ",
+        "score": 1
+      },
+      {
+        "text": "TODO: more choices",
+        "score": 0
+      }
+    ]
+  }
+]
