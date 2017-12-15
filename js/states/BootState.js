@@ -9,7 +9,7 @@ BootState.prototype = {
   },
 
   create: function () {
-    if (isDebug) {
+    if (!isDebug) {
       this.game.add.plugin(Phaser.Plugin.Debug);
       game.add.plugin(Phaser.Plugin.Inspector);
     }

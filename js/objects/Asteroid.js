@@ -1,6 +1,6 @@
 var Asteroid = function (game, settings) {
   this.settings = Object.assign({
-    startY: 45, // in px
+    startY: 150, // in px
     startX: game.world.centerX, // in px
     verticalSpeed: 0,
     rotationSpeed: 0.05,
@@ -80,9 +80,17 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
    * @param isCorrect bool
    */
   setAnswer: function(text, isCorrect) {
-    console.log('text', text);
-    //this.textObject = new Phaser.Text(game, 0, 0, text, {'backgroundColor': '#ff7380'});
-    this.textObject = game.add.text(0, 0, text, {'backgroundColor': '#ff7380'});
+    console.log(text);
+    var asteriodTextWidth = (this.width * 1.3);
+    var style = {
+      align: 'left',
+      wordWrap: true,
+      wordWrapWidth: asteriodTextWidth,
+      backgroundColor: 'rgba(255, 115, 128, 0)',
+      stroke: 'rgba(255, 243, 244, 0.95)',
+      strokeThickness: 3,
+    };
+    this.textObject = new Phaser.Text(this.game, 0, (this.height * .5), text, style);
     this.textObject.anchor.set(0.5);
     //this.textObject.x = this.x;
     //this.textObject.y = this.y;

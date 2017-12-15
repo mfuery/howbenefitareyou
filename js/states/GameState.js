@@ -105,9 +105,10 @@ GameState.prototype = {
     this.scoreText.x = game.world.width;
 
     var numAnswers = this.questions[this.currentQuestion].answers.length;
+    var offsetX = ((game.world.width / numAnswers) / 2);
     for (var i = 0; i < numAnswers; i++) {
       this.asteroids.push(new Asteroid(game, {
-        startX: ((this.game.world.width / numAnswers) * i) + 25,
+        startX: ((this.game.world.width / numAnswers) * i) + offsetX,
         textValue: this.questions[this.currentQuestion].answers[i].text,
         isCorrect: this.questions[this.currentQuestion].answers[i].score
       }));
@@ -125,7 +126,8 @@ GameState.prototype = {
     this.game.eventDispatcher.dispatch({eventType: 'dropNow'});
 
 
-
+    this.score = 8;
+//     this.showResults();
     // test answered event
     //game.eventDispatcher.dispatch({eventType: 'answered', asteroid: this.asteroids[0], state: this});
 
