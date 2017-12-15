@@ -46,7 +46,7 @@ GameState.prototype = {
   create: function () {
     this.background = new Background(game);
     this.ground = new Ground(game);
-    this.questions = this.generateQuestions(10);1
+    this.questions = this.generateQuestions(10);
     this.missile = new Missile(game);
 
     this.scoreText = game.add.text(0, 0, '', {
@@ -70,7 +70,7 @@ GameState.prototype = {
       this.asteroids.push(new Asteroid(game, {
         startX: ((this.game.world.width / this.game.difficulty) * i) + 25
       }));
-      this.asteroids[i].setAnswer('Helloworld');
+      this.asteroids[i].setAnswer(this.questions[this.currentQuestion].answers[i].text, this.questions[this.currentQuestion].answers[i].score);
     }
 
     this.questionText = game.add.text(0, 0, 'something', {
