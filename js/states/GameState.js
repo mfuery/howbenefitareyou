@@ -121,7 +121,6 @@ GameState.prototype = {
     }
 
     this.questionText = game.add.text(game.world.centerX, 0, this.questions[this.currentQuestion].question, gameConfig.fontStyles.question);
-
     this.questionText.lineSpacing = -this.questionText.fontSize * .5;
     this.questionText.anchor.x = 0.5;
 

@@ -84,6 +84,7 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
       backgroundColor: 'rgba(255, 115, 128, 0)',
       stroke: 'rgba(255, 243, 244, 0.95)',
       strokeThickness: 3,
+      fontSize: gameConfig.gameBaseFontSize,
     };
     this.textObject = new Phaser.Text(this.game, 0, (this.height * .5), text, style);
     this.textObject.anchor.set(0.5);
