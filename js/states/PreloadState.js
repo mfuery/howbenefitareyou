@@ -16,6 +16,8 @@ PreloadState.prototype = {
       fill: '#fff'
     });
 
+
+
     //Load your images, spritesheets, bitmaps...
     game.load.image('alien-1', 'assets/img/alien-1.png');
     game.load.image('alien-2', 'assets/img/alien-2.png');

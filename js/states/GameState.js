@@ -28,6 +28,11 @@ GameState.prototype = {
   score: 0,
 
   /**
+   * Text display object showing the current score.
+   */
+  scoreText: null,
+
+  /**
    * Instances of the 3-5 asteroids shown on the screen.
    */
   asteroids: [],
@@ -46,12 +51,20 @@ GameState.prototype = {
     this.questions = this.generateQuestions(10);
     this.missile = new Missile(game);
 
+    this.scoreText = game.add.text(0, 0, 'SCORE: ' + this.score, {
+      font: '30px Courier',
+      fill: '#fff',
+      stroke: '#000',
+      strokeThickness: 10
+    });
+    this.scoreText.anchor.x = 1;
+    this.scoreText.x = game.world.width;
+
     /* @todo:
     - Happens at State startup. Generates the random selection of questions for the current round.
-    - Creates the background
     - Creates 5 asteroid entity instances to be reused throughout the round. (Places them offscreen to begin with)
     - Creates question entity to be reused throughout the round
-    - Creates player launcher entity
+    - Creates missile entity
     - Creates the score entity
     */
     for (var i = 0; i < this.game.difficulty; i++) {
@@ -115,8 +128,9 @@ GameState.prototype = {
   /**
    * Updates the GameState.score property and updates the score entity
    */
-  updateScore: function () {
-    // @todo: Updates the GameState.score property and updates the score entity
+  updateScore: function (score) {
+    this.score += score;
+    this.scoreText.text = "SCORE: " + this.score;
   },
 
   /**
@@ -126,6 +140,7 @@ GameState.prototype = {
     // @todo: Creates the ResultsState and passes the player's final score.
     // @todo: triggers the StateManager to switch states (not sure how this works yet)
 
+    this.game.state.start('results');
   }
 
 };

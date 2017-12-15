@@ -11,10 +11,6 @@ MenuState.prototype = {
     console.log('createMenuState');
 
     this.background = new Background(game);
-
-
-
-
     this.ground = new Ground(game);
 
     this.start = game.add.button(0, 0, 'lift-off', this.startGame);
