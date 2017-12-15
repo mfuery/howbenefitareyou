@@ -26,7 +26,7 @@ BootState.prototype = {
       x: Utils.getGameScaleX(),
       y: Utils.getGameScaleY()
     };
-    var gameBaseFontSize = (gameConfig.baseFontSize * gameConfig.scale.x);
+    var gameBaseFontSize = (50 * gameConfig.scale.x);
 
     gameConfig.fontStyles = {
       default: {

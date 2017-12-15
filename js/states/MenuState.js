@@ -58,7 +58,7 @@ MenuState.prototype = {
     var startButtonStyle = {
       align: 'center',
       font: 'Helvetica',
-      fontSize: (gameConfig.gameBaseFontSize * gameConfig.scale.x),
+      fontSize: gameConfig.gameBaseFontSize,
       fontWeight: 'bold',
       stroke: 'rgba(52, 52, 52, 1)',
       fill: 'rgba(255, 148, 255, 1)',

@@ -122,7 +122,7 @@ GameState.prototype = {
     }
 
     this.questionText = game.add.text(game.world.centerX, 70,
-      this.questions[this.currentQuestion].question, gameConfig.fontStyles.question);
+    this.questions[this.currentQuestion].question, gameConfig.fontStyles.question);
     this.questionText.anchor.x = 0.5;
 
     game.eventDispatcher.add(this.handleEvent, this);
