@@ -13,6 +13,16 @@ var Missile = function (game) {
   this.scale.x = this.scale.y = Utils.getGameScaleX();
 
   game.eventDispatcher.add(this.handleEvent, this);
+
+  // Exhaust emitter
+  this.emitter = game.add.emitter(this.x, this.y, 500);
+  this.emitter.makeParticles(['tiny-heart']);
+  this.emitter.minParticleScale = 0.7;
+  this.emitter.maxParticleScale = 1;
+  this.emitter.setYSpeed(300, 500);
+  this.emitter.setXSpeed(-500, 500);
+  this.emitter.start(false, 1600, 5);
+
 };
 
 Missile.prototype = Object.create(Phaser.Sprite.prototype);
@@ -23,6 +33,7 @@ Missile.prototype.update = function () {
   if (!this.firing && mouseRotation > -1 && mouseRotation < 1) {
     this.rotation = mouseRotation;
   }
+
 };
 
 /**
@@ -48,6 +59,7 @@ Missile.prototype.handleEvent = function(event) {
 
     shootTween.onComplete.add(function (event) {
       game.eventDispatcher.dispatch({eventType: 'detonate'});
+      this.emitter.destroy();
     }, this);
 
     // @todo: handle animation to keep going based on current rotation.
