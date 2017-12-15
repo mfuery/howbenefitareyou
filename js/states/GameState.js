@@ -13,7 +13,7 @@ GameState.prototype = {
   /**
    * Key of the current question being displayed.
    */
-  currentQuestion: -1,
+  currentQuestion: 0,
 
   /**
    * The total number of rounds per game.
@@ -36,9 +36,45 @@ GameState.prototype = {
   asteroids: [],
 
   /**
+   * Instances of the 3-5 cores shown on the screen.
+   */
+  cores: [],
+
+  /**
    * Reference to the missile sprite instance.
    */
   missile: null,
+
+  /**
+   * Creates new game round.
+   *
+   * @param questions
+   * @param currentQuestion
+   * @param totalQuestions
+   * @param score
+   */
+  init: function(questions, currentQuestion, totalQuestions, score) {
+    this.questions = questions;
+    if (questions === undefined) {
+      this.questions = this.generateQuestions(10);
+    }
+
+    if (currentQuestion !== undefined) {
+      this.currentQuestion = currentQuestion;
+    }
+
+    if (totalQuestions !== undefined) {
+      this.totalQuestions = totalQuestions;
+    }
+
+    if (score !== undefined) {
+      this.score = score;
+    }
+
+    if (this.currentQuestion > this.totalQuestions) {
+      this.showResults();
+    }
+  },
 
   /**
    * Generates the display objects and data needed for the current state.
@@ -49,7 +85,7 @@ GameState.prototype = {
     this.questions = this.generateQuestions(10);
     this.missile = new Missile(game);
 
-    this.scoreText = game.add.text(0, 0, '', {
+    this.scoreText = game.add.text(0, 0, 'SCORE: ' + this.score + "/" + this.totalQuestions, {
       font: '30px Courier',
       fill: '#fff',
       stroke: '#000',
@@ -57,38 +93,41 @@ GameState.prototype = {
     });
     this.scoreText.anchor.x = 1;
     this.scoreText.x = game.world.width;
-    this.updateScore(0);
 
-    /* @todo:
-    - Happens at State startup. Generates the random selection of questions for the current round.
-    - Creates 5 asteroid entity instances to be reused throughout the round. (Places them offscreen to begin with)
-    - Creates question entity to be reused throughout the round
-    - Creates missile entity
-    - Creates the score entity
-    */
-    for (var i = 0; i < this.game.difficulty; i++) {
+    var numAnswers = this.questions[this.currentQuestion].answers.length;
+    for (var i = 0; i < numAnswers; i++) {
       this.asteroids.push(new Asteroid(game, {
-        startX: ((this.game.world.width / this.game.difficulty) * i) + 25
+        startX: ((this.game.world.width / numAnswers) * i) + 25
       }));
       this.asteroids[i].setAnswer(this.questions[this.currentQuestion].answers[i].text, this.questions[this.currentQuestion].answers[i].score);
+      //this.asteroids[i].setAnswer('Hello World', 1);
+
+      //this.cores.push(new Core(game, this.asteroids[i]));
     }
 
     this.questionText = game.add.text(0, 0, 'something', {
       font: '30px Courier',
       fill: '#fff'
     });
-    this.questions = this.generateQuestions(10);
-    this.showNextQuestion();
+
+    this.game.eventDispatcher.dispatch({eventType: 'dropNow'});
+
+
 
     // test answered event
     //game.eventDispatcher.dispatch({eventType: 'answered', asteroid: this.asteroids[0], state: this});
+
+
   },
 
   handleEvent: function(event) {
     console.log('GameState: event' + event.eventType);
 
+    // @todo: move "vaporize" listener to the cores
+
+    // If 'scored' event from core, it means core animation done.
     switch(event.eventType) {
-      case 'asteroidDone':
+      case 'scored':
         // animation heart to score
         this.updateScore();
         // check if show results
@@ -126,46 +165,16 @@ GameState.prototype = {
    * Update game objects on every frame.
    */
   update: function () {
-    // @todo: Listen for player input and update and/or call functions as needed
-    //updateScore();
 
-    // Asteroids
-    for (var i = 0; i < this.game.difficulty; i++) {
-      this.asteroids[i].update();
-    }
-  },
-
-  /**
-   * Goes to next index in Questions and performs logic related to displaying question and answer entities.
-   */
-  showNextQuestion: function () {
-    this.currentQuestion++;
-
-    if (this.currentQuestion > this.totalQuestions) {
-      this.showResults();
-    }
-
-    var questionData = this.questions[this.currentQuestion];
-    this.questionText.text = questionData.question;
-    for (var i = 0; i <= questionData.answers.length ; i++) {
-      //Asteroid.setAnswer(questionData.answers[i].text, questionData.answers[i].score);
-    }
-    /* @todo:
-    - Goes to next index in Questions and performs logic related to displaying question and answer entities.
-    - Places instanced asteroid entities evenly positioned apart based on number of total answers for the current question.
-    - Updates text of asteroid entities to the current question answer
-    - calls updateScore if selected answer was correct
-    - calls showResults if no more questions in current round
-    */
-    this.game.eventDispatcher.dispatch({eventType: 'beginFalling'});
   },
 
   /**
    * Updates the GameState.score property and updates the score entity
    */
   updateScore: function (score) {
+    this.currentQuestion++;
     this.score += score;
-    this.scoreText.text = 'SCORE: ' + this.score + "/" + this.totalQuestions;
+    this.game.state.start('game', true, false, this.questions, this.currentQuestion, this.totalQuestions, this.score);
   },
 
   /**
