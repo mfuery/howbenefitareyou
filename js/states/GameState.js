@@ -108,6 +108,7 @@ GameState.prototype = {
       this.asteroids[i].setAnswer(this.questions[this.currentQuestion].answers[i].text, this.questions[this.currentQuestion].answers[i].score);
 
       this.cores.push(new Core(game, this.asteroids[i]));
+      this.asteroids[i].bringToTop();
     }
 
     this.questionText = game.add.text(0, 0, this.questions[this.currentQuestion].question, {
@@ -125,10 +126,17 @@ GameState.prototype = {
     // test answered event
     //game.eventDispatcher.dispatch({eventType: 'answered', asteroid: this.asteroids[0], state: this});
 
-
+    // new Hint(this.game, this.game.world.centerX, this.game.world.centerY,
+    //   'Fire at the asteroid with the correct answer');
   },
 
+  /**
+   * Event handler, duh
+   * @param event object {eventType:<>, score:<>}
+   */
   handleEvent: function(event) {
+    console.log('GameState event: ' + event.eventType);
+
     // If 'scored' event from core, it means core animation done.
     switch(event.eventType) {
       case 'scored':

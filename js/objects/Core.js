@@ -1,34 +1,26 @@
 var Core = function (game, asteroid) {
-  //game, parent, name, addToStage, enableBody, physicsBodyType
-  Phaser.Group.call(this, game);
-
-  game.add.existing(this);
-
+  this.game = game;
   this.asteroid = asteroid;
   this.isClicked = false;
   this.isCorrect = this.asteroid.isCorrect;
+  this.imageName = (this.isCorrect ? 'heart' : 'red-x');
 
+  Phaser.Sprite.call(this, game, asteroid.x, asteroid.y, this.imageName);
+  this.game.add.existing(this);
+  this.anchor.set(0.5);
+  this.alpha = 0;
 
-  // @todo: add heart and red X.
-
-
-  //this.anchor.set(0.5);
+  //game, parent, name, addToStage, enableBody, physicsBodyType
+  this.scaleMax = 1;
   this.scale.setTo(Utils.getGameScaleX());
 
-  this.heart = new Heart(game, 50, 50);
-  this.x = 50;
-  this.y = 50;
-  //game.add.existing(this.heart);
-  //this.add(this.heart);
-
-  this.add(this.heart);
-  //this.x = this.game.world.centerX;
-  //this.y = this.game.world.centerY;
+  // this.x = this.asteroid.x;
+  // this.y = this.asteroid.y;
 
   game.eventDispatcher.add(this.handleEvent, this);
 };
 
-Core.prototype = Object.create(Phaser.Group.prototype);
+Core.prototype = Object.create(Phaser.Sprite.prototype);
 Core.prototype.constructor = Core;
 
 Core.prototype.update = function () {
@@ -41,11 +33,15 @@ Core.prototype.resize = function () {
 
 
 Core.prototype.handleEvent = function(event) {
-
   switch(event.eventType) {
     case 'answered':
       this.handleAnswered(event);
       break;
+
+    case 'detonate':
+      this.alpha = 1;
+      break;
+
     case 'vaporized':
       this.handleVaporized(event);
       break;
@@ -56,7 +52,7 @@ Core.prototype.handleEvent = function(event) {
  * Event handler to show core and check if clicked asteroid relates to this core.
  * @param event
  */
-Core.prototype.handleAnswered = function (event) {
+Core.prototype.handleAnswered = function(event) {
   console.log('Core: event' + event.eventType);
 
   if (this.asteroid === event.asteroid) {
@@ -66,6 +62,8 @@ Core.prototype.handleAnswered = function (event) {
 
   this.x = this.asteroid.x;
   this.y = this.asteroid.y;
+
+  this.alpha = 1;
 
   //game.eventDispatcher.dispatch({'eventType': 'scored', 'score': this.asteroid.});
 };
