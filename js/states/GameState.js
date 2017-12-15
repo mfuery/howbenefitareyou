@@ -13,7 +13,7 @@ GameState.prototype = {
   /**
    * Key of the current question being displayed.
    */
-  currentQuestion: -1,
+  currentQuestion: 0,
 
   /**
    * The total number of rounds per game.
@@ -58,7 +58,7 @@ GameState.prototype = {
     this.scoreText.anchor.x = 1;
     this.scoreText.x = game.world.width;
     this.updateScore(0);
-
+    this.questions = this.generateQuestions(10);
     /* @todo:
     - Happens at State startup. Generates the random selection of questions for the current round.
     - Creates 5 asteroid entity instances to be reused throughout the round. (Places them offscreen to begin with)
@@ -77,7 +77,6 @@ GameState.prototype = {
       font: '30px Courier',
       fill: '#fff'
     });
-    this.questions = this.generateQuestions(10);
     this.showNextQuestion();
 
     // test answered event
