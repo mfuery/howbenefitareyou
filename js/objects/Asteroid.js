@@ -148,7 +148,7 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
     // Particle fx! Only correct answer explodes
     var emitter = game.add.emitter(0, 0, 100);
 
-    emitter.makeParticles(['gold-1', 'gold-2', 'gold-3', 'gold-4'], undefined, 40, false, true);
+    emitter.makeParticles(['gold-1', 'gold-2', 'gold-3', 'gold-4'], undefined, 40);
     emitter.gravity = 300;
 
     emitter.x = this.x;

@@ -48,6 +48,11 @@ GameState.prototype = {
   isScoring: false,
 
   /**
+   * Sounds added to game.
+   */
+  sounds: {},
+
+  /**
    * Creates new game round.
    *
    * @param questions
@@ -96,9 +101,6 @@ GameState.prototype = {
    * Generates the display objects and data needed for the current state.
    */
   create: function () {
-    if (this.currentQuestion === 1) {
-      //return;
-    }
     this.background = new Background(game);
     this.ground = new Ground(game);
     this.missile = new Missile(game);
@@ -106,7 +108,9 @@ GameState.prototype = {
     this.scoreText = game.add.text(0, 0, 'SCORE: ' + this.score + "/" + this.totalQuestions,
       gameConfig.fontStyles.white);
     this.scoreText.anchor.x = 1;
+    this.scoreText.anchor.y = 0 ;
     this.scoreText.x = game.world.width;
+    this.scoreText.y = game.world.height - this.scoreText.height;
 
     var numAnswers = this.questions[this.currentQuestion].answers.length;
     var offsetX = ((game.world.width / numAnswers) / 2);
@@ -121,14 +125,15 @@ GameState.prototype = {
       this.asteroids[i].bringToTop();
     }
 
-    this.questionText = game.add.text(game.world.centerX, 70,
-    this.questions[this.currentQuestion].question, gameConfig.fontStyles.question);
+    this.questionText = game.add.text(game.world.centerX, 0, this.questions[this.currentQuestion].question, gameConfig.fontStyles.question);
+    this.questionText.lineSpacing = -this.questionText.fontSize * .5;
     this.questionText.anchor.x = 0.5;
 
     game.eventDispatcher.add(this.handleEvent, this);
 
     // Countdown timer
-    var countdownDuration = Phaser.Timer.SECOND * 5;
+    var countdownDuration = 4999;
+    this.lastSecondsRemaining = countdownDuration;
     setTimeout(function() {
       this.game.eventDispatcher.dispatch({eventType: 'dropNow'});
     }.bind(this), countdownDuration);
@@ -140,6 +145,10 @@ GameState.prototype = {
     this.cdText = this.game.add.text(this.game.world.centerX,
       this.game.world.centerY - (this.game.world.height / 4), '', gameConfig.fontStyles.white);
     this.cdText.alpha = 1;
+
+    // Sounds
+    this.sounds.beep = this.game.add.audio('beep-1');
+    this.sounds.go = this.game.add.audio('go-1');
 
     // new Hint(this.game, this.game.world.centerX, this.game.world.centerY,
     //   'Fire at the asteroid with the correct answer');
@@ -226,8 +235,12 @@ GameState.prototype = {
       var secondsRemaining = Math.round((this.cdTimerEvent.delay - this.cdTimer.ms) / 1000);
       this.cdText.text = '' + secondsRemaining;
       if (secondsRemaining < 1) {
-        this.cdText.text = 'GO!'
+        this.cdText.text = 'GO!';
+        this.sounds.go.play();
+      } else if (this.lastSecondsRemaining != secondsRemaining) {
+        this.sounds.beep.play();
       }
+      this.lastSecondsRemaining = secondsRemaining;
     } else {
       this.cdText.alpha = 0;
     }
