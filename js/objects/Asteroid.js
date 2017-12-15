@@ -54,16 +54,16 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
   wasChosen: false,
 
   update: function () {
-    if (this.body) {
-      this.body.gravity.y = this.settings.verticalSpeed;
-    }
-    this.rotation += this.settings.rotationSpeed;
-    this.textObject.rotation -= this.settings.rotationSpeed;
-
-    if (this.isAlive && this.y > game.world.height - (20 * Utils.getGameScaleY())) {
-      this.isAlive = false;
-      this.explode();
-    }
+//     if (this.body) {
+//       this.body.gravity.y = this.settings.verticalSpeed;
+//     }
+//     this.rotation += this.settings.rotationSpeed;
+//     this.textObject.rotation -= this.settings.rotationSpeed;
+//
+//     if (this.isAlive && this.y > game.world.height - (20 * Utils.getGameScaleY())) {
+//       this.isAlive = false;
+//       this.explode();
+//     }
   },
 
   /**
@@ -73,16 +73,16 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
    */
   setAnswer: function(text, isCorrect) {
     console.log(text);
-  var asteriodTextWidth = (this.width * 1.3);
-  var style = {
-    align: 'left',
-    wordWrap: true,
-    wordWrapWidth: asteriodTextWidth,
-    backgroundColor: 'rgba(255, 115, 128, 0)',
-    stroke: 'rgba(255, 243, 244, 0.95)',
-    strokeThickness: 3,
-  };
-  this.textObject = new Phaser.Text(this.game, 0, (this.height * .5), text, style);
+    var asteriodTextWidth = (this.width * 1.3);
+    var style = {
+      align: 'left',
+      wordWrap: true,
+      wordWrapWidth: asteriodTextWidth,
+      backgroundColor: 'rgba(255, 115, 128, 0)',
+      stroke: 'rgba(255, 243, 244, 0.95)',
+      strokeThickness: 3,
+    };
+    this.textObject = new Phaser.Text(this.game, 0, (this.height * .5), text, style);
     this.textObject.anchor.set(0.5);
     this.addChild(this.textObject);
 
