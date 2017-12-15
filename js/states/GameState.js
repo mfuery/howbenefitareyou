@@ -80,8 +80,8 @@ GameState.prototype = {
     this.questions = this.generateQuestions(10);
     this.showNextQuestion();
 
-    //game.eventDispatcher.dispatch({eventType: 'answered', asteroid: {}});
-    // this.game.eventDispatcher.add(this.handleEvent);
+    // test answered event
+    //game.eventDispatcher.dispatch({eventType: 'answered', asteroid: this.asteroids[0], state: this});
   },
 
   handleEvent: function(event) {
