@@ -47,9 +47,16 @@ GameState.prototype = {
     game.add.plugin(PhaserInput.Plugin);
 
 
+    for (var i = 0; i < this.game.difficulty; i++) {
+      this.asteroids.push(new Asteroid(game, {
+        startX: ((this.game.world.width / this.game.difficulty) * i) + 25
+      }));
+    }
 
     // @todo: do gameState create stuff here.
 
+    this.background = new Background(game);
+    this.ground = new Ground(game);
     this.questions = this.generateQuestions(10);
 
     this.asteroids.push(new Asteroid(game, 0, 0));
@@ -57,6 +64,7 @@ GameState.prototype = {
     this.asteroids.push(new Asteroid(game, 100, 100));
     this.asteroids.push(new Asteroid(game, 200, 200));
 
+    this.missile = new Missile(game);
 
 
 
