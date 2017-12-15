@@ -36,22 +36,22 @@ GameState.prototype = {
    * Generates the display objects and data needed for the current state.
    */
   create: function () {
-    game.add.plugin(Phaser.Plugin.Debug);
-    //game.add.plugin(Phaser.Plugin.Inspector);
-    game.add.plugin(PhaserSuperStorage.StoragePlugin);
-    game.add.plugin(PhaserInput.Plugin);
-
 
 
     // @todo: do gameState create stuff here.
 
     this.generateQuestions();
 
+    this.background = new Background(game);
+
+    this.ground = new Ground(game);
+
     this.asteroids.push(new Asteroid(game, 0, 0));
     this.asteroids.push(new Asteroid(game, 50, 50));
     this.asteroids.push(new Asteroid(game, 100, 100));
     this.asteroids.push(new Asteroid(game, 200, 200));
 
+    this.missile = new Missile(game);
 
 
 

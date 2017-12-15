@@ -41,6 +41,7 @@ PreloadState.prototype = {
     game.load.image('kitty', 'assets/img/kitty.png');
     game.load.image('laser', 'assets/img/laser.png');
     game.load.image('lift-off', 'assets/img/lift-off.png');
+    game.load.image('lift-off-sm', 'assets/img/lift-off-sm.png');
     game.load.image('model-1', 'assets/img/model-1.gif');
     game.load.image('model-2', 'assets/img/model-2.gif');
     game.load.image('model-3', 'assets/img/model-3.gif');
