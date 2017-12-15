@@ -29,3 +29,5 @@ game.state.add('results', ResultsState);
 
 game.state.start('boot');
 game.difficulty = 4;
+
+isDebug = !(window.location.href.indexOf('herokuapp') > 0);

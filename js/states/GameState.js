@@ -70,7 +70,7 @@ GameState.prototype = {
       this.asteroids.push(new Asteroid(game, {
         startX: ((this.game.world.width / this.game.difficulty) * i) + 25
       }));
-      // this.asteroids[i].
+      this.asteroids[i].setAnswer('Helloworld');
     }
 
     this.questionText = game.add.text(0, 0, 'something', {
@@ -115,6 +115,10 @@ GameState.prototype = {
     // @todo: Listen for player input and update and/or call functions as needed
     //updateScore();
 
+    // Asteroids
+    for (var i = 0; i < this.game.difficulty; i++) {
+      this.asteroids[i].update();
+    }
   },
 
   /**
