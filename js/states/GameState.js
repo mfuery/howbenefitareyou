@@ -45,7 +45,7 @@ GameState.prototype = {
 
     // @todo: do gameState create stuff here.
 
-    this.generateQuestions();
+    this.questions = this.generateQuestions(10);
 
     this.asteroids.push(new Asteroid(game, 0, 0));
     this.asteroids.push(new Asteroid(game, 50, 50));
@@ -69,8 +69,21 @@ GameState.prototype = {
   /**
    * Generates the random selection of 10 questions for the current round.
    */
-  generateQuestions: function() {
-    // @todo: Generates the random selection of 10 questions for the current round.
+  generateQuestions: function(num_questions) {
+    var questions = game.cache.getJSON('questions');
+    var shuffled = questions.slice(0);
+    var i = questions.length;
+    var min = i - num_questions;
+    var temp;
+    var index;
+
+    while (i-- > min) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+    }
+    return shuffled.slice(min);
   },
 
   /**
