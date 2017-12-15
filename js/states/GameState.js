@@ -61,6 +61,7 @@ GameState.prototype = {
       // this.asteroids[i].
     }
 
+    this.questions = this.generateQuestions(10);
   },
 
   /**
