@@ -13,6 +13,16 @@ var Missile = function (game) {
   this.scale.x = this.scale.y = Utils.getGameScaleX();
 
   game.eventDispatcher.add(this.handleEvent, this);
+
+  // Exhaust emitter
+  this.emitter = game.add.emitter(this.x, this.y, 500);
+  this.emitter.makeParticles(['tiny-heart']);
+  this.emitter.minParticleScale = 0.7;
+  this.emitter.maxParticleScale = 1;
+  this.emitter.setYSpeed(300, 500);
+  this.emitter.setXSpeed(-500, 500);
+  this.emitter.start(false, 1600, 5);
+
 };
 
 Missile.prototype = Object.create(Phaser.Sprite.prototype);
@@ -23,6 +33,9 @@ Missile.prototype.update = function () {
   if (!this.firing && mouseRotation > -1 && mouseRotation < 1) {
     this.rotation = mouseRotation;
   }
+
+  this.emitter.x = this.x;
+  this.emitter.y = this.y;
 };
 
 /**
@@ -37,8 +50,8 @@ Missile.prototype.resize = function () {
  */
 Missile.prototype.handleEvent = function(event) {
   if (event.eventType === 'answered') {
-    console.log('this', this);
-    console.log('event.asteroid', event.asteroid);
+    // console.log('this', this);
+    // console.log('event.asteroid', event.asteroid);
     this.firing = true;
 
     this.rotation = this.game.physics.arcade.angleBetween(this, event.asteroid) + (90 * Phaser.Math.DEG_TO_RAD);
@@ -46,8 +59,9 @@ Missile.prototype.handleEvent = function(event) {
     var shootTween = game.add.tween(this).to({x: event.asteroid.position.x}, 500, Phaser.Easing.Exponential.In, true);
     game.add.tween(this).to({y: event.asteroid.position.y}, 500, Phaser.Easing.Exponential.In, true);
 
-    shootTween.onComplete.add(function (event) {
-      game.eventDispatcher.dispatch({eventType: 'detonate'});
+    shootTween.onComplete.add(function (tweenEvent) {
+      game.eventDispatcher.dispatch({eventType: 'detonate', asteroid: event.asteroid});
+      this.emitter.destroy();
     }, this);
 
     // @todo: handle animation to keep going based on current rotation.
