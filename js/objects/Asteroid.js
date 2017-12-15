@@ -61,6 +61,7 @@ Asteroid.prototype.update = function () {
   this.textObject.rotation -= this.settings.rotationSpeed;
 
   if (this.isAlive && this.y > game.world.height - (20 * Utils.getGameScaleY())) {
+    this.soundExplosion1.play();
     this.isAlive = false;
     this.explode();
   }
@@ -108,6 +109,15 @@ Asteroid.prototype.handleEvent = function(event) {
         // burst of gold glitter
         this.explode();
         this.alpha = 0;
+        this.game.eventDispatcher.dispatch({eventType: 'asteroidDone', score: 1});
+      } else {
+        // fade out
+        var tween = this.game.add.tween(this).to({alpha: 0}, 1000, Phaser.Easing.Linear.None).start();
+
+        // Red X
+        tween.onComplete.add(function() {
+          this.eventDispatcher.dispatch({eventType: 'blownUp'});
+        }, this);
       }
       // fade out
       var tween = this.game.add.tween(this)

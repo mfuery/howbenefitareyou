@@ -113,7 +113,8 @@ GameState.prototype = {
     this.game.eventDispatcher.dispatch({eventType: 'dropNow'});
 
 
-
+    this.score = 8;
+//     this.showResults();
     // test answered event
     //game.eventDispatcher.dispatch({eventType: 'answered', asteroid: this.asteroids[0], state: this});
 
@@ -182,6 +183,7 @@ GameState.prototype = {
    */
   showResults: function () {
     this.game.state.start('results', true, false, this.score);
+//     this.game.state.start('menu', true, false, this.score);
   }
 
 };
