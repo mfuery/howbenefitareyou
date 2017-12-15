@@ -1,6 +1,7 @@
 var Asteroid = function (game, settings) {
   this.settings = Object.assign({
     startY: 25, // in px
+    startX: game.world.centerX,
     verticalSpeed: 5, // in px per sec
     rotationSpeed: 0.05,
     sprite: null
@@ -17,7 +18,7 @@ var Asteroid = function (game, settings) {
 
   game.add.existing(this);
 
-  this.scale.x = this.scale.y = getGameScale();
+  this.scale.x = this.scale.y = Utils.getGameScaleX();
   this.anchor.set(0.5);
   this.settings.rotationSpeed += Math.floor(Math.random() * 0.1) * (Math.random() > 0.5 ? -1 : 1);
 
@@ -26,7 +27,8 @@ var Asteroid = function (game, settings) {
   this.settings.verticalSpeed = this.game.difficulty * 20 +
     (this.game.difficulty * Math.floor(Math.random() * 10)
       * (Math.random() > 0.5 ? -1 : 1));
-  // console.log(['gravity/rotation:',' ', this.body.gravity.y, '/', this.settings.rotationSpeed].join('/'));
+  console.log(['vSpeed/rotation:',' ',  this.settings.verticalSpeed, '/', this.settings.rotationSpeed].join('/'));
+  this.body.gravity.y = this.settings.verticalSpeed;
 
   // This is tweening
   // this.game.add.tween(this.body)
@@ -38,16 +40,15 @@ Asteroid.prototype.constructor = Asteroid;
 
 Asteroid.prototype.update = function () {
   // @todo: add "wiggle" animation.
-  this.body.velocity.y = this.settings.verticalSpeed;
   this.rotation += this.settings.rotationSpeed;
+
+  if (this.y > this.game.world.height) {
+    this.destroy();
+  }
 };
 
 Asteroid.prototype.resize = function () {
   // @todo: update position when screen is resized
-};
-
-Asteroid.prototype.destroy = function () {
-  // render
 };
 
 // var AsteroidGroup = function(number) {
