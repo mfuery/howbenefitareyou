@@ -127,8 +127,8 @@ GameState.prototype = {
       font: '50px Signpainter',
       wordWrap: true,
       wordWrapWidth: (game.world.width - 30),
-      fill: 'rgba(255, 56, 112, 20)',
-      stroke: 'rgba(255, 243, 244, 0.85)',
+      stroke: 'rgba(255, 56, 112, 20)',
+      fill: 'rgba(255, 243, 244, 0.85)',
       strokeThickness: 3,
     };
 
