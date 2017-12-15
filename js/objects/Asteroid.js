@@ -54,16 +54,16 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
   wasChosen: false,
 
   update: function () {
-//     if (this.body) {
-//       this.body.gravity.y = this.settings.verticalSpeed;
-//     }
-//     this.rotation += this.settings.rotationSpeed;
-//     this.textObject.rotation -= this.settings.rotationSpeed;
-//
-//     if (this.isAlive && this.y > game.world.height - (20 * Utils.getGameScaleY())) {
-//       this.isAlive = false;
-//       this.explode();
-//     }
+    if (this.body) {
+      this.body.gravity.y = this.settings.verticalSpeed;
+    }
+    this.rotation += this.settings.rotationSpeed;
+    this.textObject.rotation -= this.settings.rotationSpeed;
+
+    if (this.isAlive && this.y > game.world.height - (20 * Utils.getGameScaleY())) {
+      this.isAlive = false;
+      this.explode();
+    }
   },
 
   /**
@@ -102,6 +102,7 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
           .to({alpha:1}, 2000, Phaser.Easing.Linear.None).start();
 
         beginTween.onComplete.add(function(event) {
+          console.log('beginTween complete')
           this.settings.verticalSpeed =  50 + (Math.random() * 20);
         }, this);
         break;
