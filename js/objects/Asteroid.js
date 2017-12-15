@@ -70,9 +70,16 @@ Asteroid.prototype.update = function () {
  */
 Asteroid.prototype.setAnswer = function(text, isCorrect) {
   console.log(text);
-  this.textObject = new Phaser.Text(this.game, 0, 0, text, {
-    'backgroundColor': '#ff7380'
-  });
+  var asteriodTextWidth = (this.width * 1.3);
+  var style = {
+    align: 'left',
+    wordWrap: true,
+    wordWrapWidth: asteriodTextWidth,
+    backgroundColor: 'rgba(255, 115, 128, 0)',
+    stroke: 'rgba(255, 243, 244, 0.95)',
+    strokeThickness: 3,
+  };
+  this.textObject = new Phaser.Text(this.game, 0, (this.height * .5), text, style);
   this.textObject.anchor.set(0.5);
   this.addChild(this.textObject);
 
