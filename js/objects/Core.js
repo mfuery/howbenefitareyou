@@ -12,6 +12,8 @@ var Core = function (game, asteroid) {
   //this.scale.setTo(Utils.getGameScaleY());
   //this.x = this.game.world.centerX;
   //this.y = this.game.world.centerY;
+
+  game.eventDispatcher.add(this.handleEvent, this);
 };
 
 Core.prototype = Object.create(Phaser.Group.prototype);
@@ -25,3 +27,14 @@ Core.prototype.resize = function () {
   // @todo: update position/scale when screen is resized
 };
 
+
+Core.prototype.handleEvent = function(event) {
+
+  switch(event.eventType) {
+    case 'vaporized':
+      console.log('Core: event' + event.eventType);
+      // @todo: animate heart to top right.
+      game.eventDispatcher.dispatch({'eventType': 'scored'});
+      break;
+  }
+};

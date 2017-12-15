@@ -54,6 +54,7 @@ GameState.prototype = {
    * @param score
    */
   init: function(questions, currentQuestion, totalQuestions, score) {
+    console.log('GAME STATE INIT *********', questions, currentQuestion, totalQuestions, score);
     this.questions = questions;
     if (questions === undefined) {
       this.questions = this.generateQuestions(10);
@@ -100,15 +101,16 @@ GameState.prototype = {
         startX: ((this.game.world.width / numAnswers) * i) + 25
       }));
       this.asteroids[i].setAnswer(this.questions[this.currentQuestion].answers[i].text, this.questions[this.currentQuestion].answers[i].score);
-      //this.asteroids[i].setAnswer('Hello World', 1);
 
-      //this.cores.push(new Core(game, this.asteroids[i]));
+      this.cores.push(new Core(game, this.asteroids[i]));
     }
 
-    this.questionText = game.add.text(0, 0, 'something', {
+    this.questionText = game.add.text(0, 0, this.questions[this.currentQuestion].question, {
       font: '30px Courier',
       fill: '#fff'
     });
+
+    game.eventDispatcher.add(this.handleEvent, this);
 
     this.game.eventDispatcher.dispatch({eventType: 'dropNow'});
 
@@ -122,13 +124,10 @@ GameState.prototype = {
   },
 
   handleEvent: function(event) {
-    console.log('GameState: event' + event.eventType);
-
-    // @todo: move "vaporize" listener to the cores
-
     // If 'scored' event from core, it means core animation done.
     switch(event.eventType) {
       case 'scored':
+        console.log('GameState: scored', event.eventType);
         // animation heart to score
         this.updateScore();
         // check if show results
