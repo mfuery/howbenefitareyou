@@ -42,10 +42,12 @@ var Asteroid = function (game, settings) {
   this.game.eventDispatcher.add(this.handleEvent, this);
 
   // When debugging: click to detonate
-  this.game.input.onDown.add(function() {
-    this.game.eventDispatcher.dispatch({eventType: 'answered'});
-    this.game.eventDispatcher.dispatch({eventType: 'detonate'});
-  }, this);
+  if (isDebug) {
+    this.game.input.onDown.add(function() {
+      this.game.eventDispatcher.dispatch({eventType: 'answered'});
+      this.game.eventDispatcher.dispatch({eventType: 'detonate'});
+    }, this);
+  }
 };
 
 Asteroid.prototype = Object.create(Phaser.Sprite.prototype);
