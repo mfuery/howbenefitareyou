@@ -53,7 +53,7 @@ PreloadState.prototype = {
     game.load.image('tooltip-formula', 'assets/img/tooltip-formula.png');
     game.load.image('UFO', 'assets/img/UFO.png');
     game.load.image('heart', 'assets/img/heart.png');
-    game.load.image('heart-tiny', 'assets/img/heart-tiny.png');
+    game.load.image('tiny-heart', 'assets/img/tiny-heart.png');
     // Gold glitter
     game.load.image('gold-1', 'assets/img/gold-1.png');
     game.load.image('gold-2', 'assets/img/gold-2.png');

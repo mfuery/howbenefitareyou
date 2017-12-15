@@ -54,7 +54,11 @@ GameState.prototype = {
    * @param score
    */
   init: function(questions, currentQuestion, totalQuestions, score) {
-    console.log('GAME STATE INIT *********', questions, currentQuestion, totalQuestions, score);
+    console.log('GAME STATE INIT *********');
+    console.log('questions', questions);
+    console.log('currentQuestion', currentQuestion);
+    console.log('totalQuestions', totalQuestions);
+    console.log('score', score);
     this.questions = questions;
     if (questions === undefined) {
       this.questions = this.generateQuestions(10);
@@ -127,6 +131,7 @@ GameState.prototype = {
     // If 'scored' event from core, it means core animation done.
     switch(event.eventType) {
       case 'scored':
+        this.isScoring = true;
         console.log('GameState: scored', event.eventType);
         // animation heart to score
         this.updateScore();
