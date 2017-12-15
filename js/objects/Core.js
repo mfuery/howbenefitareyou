@@ -68,11 +68,17 @@ Core.prototype.handleAnswered = function(event) {
 };
 
 Core.prototype.handleVaporized = function (event) {
-  // @todo: animate heart to top right.
+  console.log('Core: event' + event.eventType);
+
   if (this.isClicked) {
     game.eventDispatcher.dispatch({
       'eventType': 'scored',
       'score': this.isCorrect
     });
+
+    if (this.isCorrect) {
+      // @todo: animate heart to top right.
+      // this.game.add.tween
+    }
   }
 };
