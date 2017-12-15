@@ -39,7 +39,8 @@ Core.prototype.handleEvent = function(event) {
       break;
 
     case 'detonate':
-      this.alpha = 1;
+      var floatTween = game.add.tween(this)
+        .to({alpha: 1}, 1000, Phaser.Easing.Exponential.In, true);
       break;
 
     case 'vaporized':
@@ -62,8 +63,6 @@ Core.prototype.handleAnswered = function(event) {
   this.x = this.asteroid.x;
   this.y = this.asteroid.y;
 
-  this.alpha = 1;
-
   //game.eventDispatcher.dispatch({'eventType': 'scored', 'score': this.asteroid.});
 };
 
@@ -71,14 +70,23 @@ Core.prototype.handleVaporized = function (event) {
   console.log('Core: event' + event.eventType);
 
   if (this.isClicked) {
-    game.eventDispatcher.dispatch({
-      'eventType': 'scored',
-      'score': this.isCorrect
-    });
-
     if (this.isCorrect) {
       // @todo: animate heart to top right.
-      // this.game.add.tween
+      // this.rotation = this.game.physics.arcade.angleBetween(this, event.asteroid) + (90 * Phaser.Math.DEG_TO_RAD);
+
+      setTimeout(function() {
+        var floatTween = this.game.add.tween(this).to({y: 0},
+          1000, Phaser.Easing.Exponential.Out, true);
+        this.game.add.tween(this).to({x: this.game.width},
+          2000, Phaser.Easing.Exponential.Out, true);
+      }.bind(this), 700);
     }
+
+    setTimeout(function() {
+      this.game.eventDispatcher.dispatch({
+        'eventType': 'scored',
+        'score': this.isCorrect
+      });
+    }.bind(this), 3000);
   }
 };
