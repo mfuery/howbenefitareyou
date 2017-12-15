@@ -20,6 +20,38 @@ MenuState.prototype = {
     this.start.y = this.game.world.centerY;
 
     // @todo: add title and button text
+    this.start.title = game.add.text(game.world.centerX, game.world.centerY - (this.start.height * .77), 'How Benefit Are You?', {
+      font: '30px Signpainter',
+      fill: '#fff'
+    });
+
+    //  Centers the text
+    this.start.title.anchor.set(0.5);
+    this.start.title.align = 'center';
+
+    this.start.title.fontWeight = 'bold';
+    this.start.title.fontSize = 130;
+
+    var grd = this.start.title.context.createLinearGradient(0, 0, 0, this.start.title.height);
+
+    //  Add in 2 color stops
+    grd.addColorStop(0, '#8ED6FF');
+    grd.addColorStop(1, '#004CB3');
+
+    //  And apply to the Text
+    this.start.title.fill = grd;
+
+    // @todo: add title and button text
+    this.start.button = game.add.text(game.world.centerX, game.world.centerY, 'START', {
+      font: '30px Helvetica',
+      fill: '#FF94FF'
+    });
+    this.start.button.anchor.set(0.5);
+    this.start.button.align = 'center';
+    this.start.button.fontWeight = 'bold';
+    this.start.button.fontSize = 50;
+    this.start.button.stroke = '#343434';
+    this.start.button.strokeThickness = 2;
   },
 
   /**
