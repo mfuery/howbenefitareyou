@@ -75,10 +75,12 @@ Core.prototype.handleVaporized = function(event) {
       // this.rotation = this.game.physics.arcade.angleBetween(this, event.asteroid) + (90 * Phaser.Math.DEG_TO_RAD);
 
       setTimeout(function() {
-        var floatTween = this.game.add.tween(this).to({y: 30 * Utils.getGameScaleY()},
-          1000, Phaser.Easing.Exponential.Out, true);
-        this.game.add.tween(this).to({x: this.game.width - (30 * Utils.getGameScaleX())},
-          2000, Phaser.Easing.Exponential.Out, true);
+        var floatTween = this.game.add.tween(this).to({
+            y: this.game.world.height - (30 * Utils.getGameScaleY())
+        }, 1000, Phaser.Easing.Exponential.Out, true);
+        this.game.add.tween(this).to({
+            x: this.game.width - (30 * Utils.getGameScaleX())
+        }, 2000, Phaser.Easing.Exponential.Out, true);
       }.bind(this), 700);
     }
 
