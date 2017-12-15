@@ -10,14 +10,16 @@ var Missile = function (game) {
   this.y = this.game.world.height - (this.height * .35);
 
   this.scale.x = this.scale.y = Utils.getGameScaleX();
-
 };
 
 Missile.prototype = Object.create(Phaser.Sprite.prototype);
 Missile.prototype.constructor = Missile;
 
 Missile.prototype.update = function () {
-
+  var mouseRotation = this.game.physics.arcade.angleToPointer(this) + (90 * Phaser.Math.DEG_TO_RAD);
+  if (mouseRotation > -1 && mouseRotation < 1) {
+    this.rotation = mouseRotation;
+  }
 };
 
 Missile.prototype.resize = function () {
