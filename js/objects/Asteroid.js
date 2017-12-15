@@ -1,6 +1,6 @@
 var Asteroid = function (game, settings) {
   this.settings = Object.assign({
-    startY: 150, // in px
+    startY: 200, // in px
     startX: game.world.centerX, // in px
     verticalSpeed: 0,
     rotationSpeed: 0.05,
@@ -60,8 +60,6 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
 
   textObject: null,
 
-  firstUpdate: false,
-
   update: function () {
     this.body.gravity.y = this.settings.verticalSpeed;
     this.rotation += this.settings.rotationSpeed;
@@ -82,7 +80,7 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
     console.log(text);
     var asteroidTextWidth = (this.width * 1.3);
     var style = {
-      align: 'left',
+      align: 'center',
       wordWrap: true,
       wordWrapWidth: asteroidTextWidth,
       backgroundColor: 'rgba(255, 115, 128, 0)',
