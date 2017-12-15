@@ -44,7 +44,7 @@ var Asteroid = function (game, settings) {
   // When debugging: click to detonate
   if (isDebug) {
     this.game.input.onDown.add(function() {
-      this.game.eventDispatcher.dispatch({eventType: 'answered'});
+      this.game.eventDispatcher.dispatch({eventType: 'answered', asteroid: this});
       this.game.eventDispatcher.dispatch({eventType: 'detonate'});
     }, this);
   }
@@ -72,6 +72,7 @@ Asteroid.prototype.update = function () {
  * @param isCorrect bool
  */
 Asteroid.prototype.setAnswer = function(text, isCorrect) {
+  console.log(text);
   this.textObject = new Phaser.Text(this.game, 0, 0, text, {
     'backgroundColor': '#ff7380'
   });
