@@ -32,7 +32,12 @@ BootState.prototype = {
         fill: 'rgba(255, 243, 244, 0.85)',
         strokeThickness: 3,
       }
-    }
+    };
+    gameConfig.scale = {
+      x: Utils.getGameScaleX(),
+      y: Utils.getGameScaleY()
+    };
+
     /* @todo need fullscreen switch
     if (game.input.keyboard.justPressed(Phaser.Keyboard.F)) {
       // Maintain aspect ratio
