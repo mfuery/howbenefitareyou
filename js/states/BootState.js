@@ -21,5 +21,17 @@ BootState.prototype = {
 
     //Initial Load State
     game.state.start('preload');
+
+    /* @todo need fullscreen switch
+    if (game.input.keyboard.justPressed(Phaser.Keyboard.F)) {
+      // Maintain aspect ratio
+      game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+      if (game.scale.isFullScreen) {
+        game.scale.stopFullScreen();
+      } else {
+        game.scale.startFullScreen(false);
+      }
+    }
+    */
   }
 };

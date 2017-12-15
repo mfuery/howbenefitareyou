@@ -81,6 +81,18 @@ GameState.prototype = {
     this.showNextQuestion();
 
     //game.eventDispatcher.dispatch({eventType: 'answered', asteroid: {}});
+    // this.game.eventDispatcher.add(this.handleEvent);
+  },
+
+  handleEvent: function(event) {
+    console.log('GameState: event' + event.eventType);
+
+    switch(event.eventType) {
+      case 'asteroidDone':
+        // animation heart to score
+        this.updateScore();
+        // check if show results
+    }
   },
 
   /**
@@ -145,6 +157,7 @@ GameState.prototype = {
     - calls updateScore if selected answer was correct
     - calls showResults if no more questions in current round
     */
+    this.game.eventDispatcher.dispatch({eventType: 'beginFalling'});
   },
 
   /**

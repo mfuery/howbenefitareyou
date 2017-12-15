@@ -16,9 +16,7 @@ PreloadState.prototype = {
       fill: '#fff'
     });
 
-
-
-    //Load your images, spritesheets, bitmaps...
+    // Load your images, spritesheets, bitmaps...
     game.load.image('alien-1', 'assets/img/alien-1.png');
     game.load.image('alien-2', 'assets/img/alien-2.png');
     game.load.image('alien-3', 'assets/img/alien-3.png');
@@ -54,6 +52,8 @@ PreloadState.prototype = {
     game.load.image('tooltip-brush', 'assets/img/tooltip-brush.png');
     game.load.image('tooltip-formula', 'assets/img/tooltip-formula.png');
     game.load.image('UFO', 'assets/img/UFO.png');
+    game.load.image('heart', 'assets/img/heart.png');
+    game.load.image('heart-tiny', 'assets/img/heart-tiny.png');
 
     // Videos
     // game.load.video('bigbang', 'assets/img/bigbang.mp4');

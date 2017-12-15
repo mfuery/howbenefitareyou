@@ -1,8 +1,8 @@
 var Asteroid = function (game, settings) {
   this.settings = Object.assign({
-    startY: 25, // in px
-    startX: game.world.centerX,
-    verticalSpeed: 40,
+    startY: 45, // in px
+    startX: game.world.centerX, // in px
+    verticalSpeed: 0,
     rotationSpeed: 0.05,
     sprite: null
   }, settings);
@@ -19,9 +19,9 @@ var Asteroid = function (game, settings) {
 
   game.add.existing(this);
 
+  // Movement
   this.scale.x = this.scale.y = Utils.getGameScaleX();
   this.anchor.set(0.5);
-  this.settings.verticalSpeed += Math.random() * 20;
 
   // This is velocity via arcade physics
   this.game.physics.arcade.enable(this);
@@ -29,30 +29,28 @@ var Asteroid = function (game, settings) {
     // this.game.difficulty * 20 +
     // (this.game.difficulty * Math.floor(Math.random() * 10)
     //   * (Math.random() > 0.5 ? -1 : 1));
-  console.log(['vSpeed/rotation:',' ',  this.settings.verticalSpeed, '/', this.settings.rotationSpeed].join('/'));
-  this.body.gravity.y = this.settings.verticalSpeed;
-
-  // This is tweening
-  // this.game.add.tween(this.body)
-  //   .to({y: this.ga}, 3000, Phaser.Easing.Linear.None, true);
+  //console.log(['vSpeed/rotation:',' ', this.settings.verticalSpeed, '/', this.settings.rotationSpeed].join('/'));
 
   // Sounds
-  this.soundExplosion1 = this.game.add.audio('explosion-1');//new Phaser.Sound(this.game, 'explosion-1');
+  this.soundExplosion1 = this.game.add.audio('explosion-1');
   this.isAlive = true;
 
-  // Events
-  this.events.onKilled = this.onKilled;
-};
+  //
+  this.alpha = 0;
 
-Asteroid.prototype.onKilled = function() {
-  console.log('oops');
-}
+  // Events
+  this.game.eventDispatcher.add(this.handleEvent, this);
+
+  this.game.input.onDown.add(this.explode, this);
+};
 
 Asteroid.prototype = Object.create(Phaser.Sprite.prototype);
 Asteroid.prototype.constructor = Asteroid;
 
 Asteroid.prototype.update = function () {
-  // @todo: add "wiggle" animation.
+  if (this.body) {
+    this.body.gravity.y = this.settings.verticalSpeed;
+  }
   this.rotation += this.settings.rotationSpeed;
   this.textObject.rotation -= this.settings.rotationSpeed;
 
@@ -68,42 +66,73 @@ Asteroid.prototype.update = function () {
  * @param text
  * @param isCorrect bool
  */
-Asteroid.prototype.setAnswer = function (text, isCorrect) {
+Asteroid.prototype.setAnswer = function(text, isCorrect) {
   this.textObject = new Phaser.Text(this.game, 0, 0, text, {
-    'backgroundColor': 'pink'
+    'backgroundColor': '#ff7380'
   });
   this.addChild(this.textObject);
+
+  this.isCorrect = isCorrect;
+};
+
+Asteroid.prototype.handleEvent = function(event) {
+  console.log('Asteroid event: ' + event.eventType);
+
+  switch(event.eventType) {
+    case 'beginFalling':
+      var beginTween = this.game.add.tween(this)
+        .to({alpha:1}, 2000, Phaser.Easing.Linear.None).start();
+
+      beginTween.onComplete.add(function(event) {
+        this.settings.verticalSpeed =  50 + (Math.random() * 20);
+      }, this);
+      break;
+
+    case 'answered':
+      this.settings.verticalSpeed = 0;
+      break;
+
+    case 'blowUp':
+      if (this.isCorrect) {
+        // burst of hearts
+        this.explode();
+        // pink heart
+        this.game.eventDispatcher.dispatch({eventType: 'asteroidDone', score: 1});
+      } else {
+        // fade out
+        var tween = this.game.add.tween(this).to({alpha: 0}, 1000, Phaser.Easing.Linear.None).start();
+
+        // Red X
+        tween.onComplete.add(function() {
+          this.eventDispatcher.dispatch({eventType: 'blownUp'});
+        }, this);
+      }
+      break;
+
+    default: break;
+  }
 };
 
 Asteroid.prototype.explode = function() {
-  // @todo particle fx!
-  // hide rock img
-  this.texture.destroy();
+  // @todo particle fx! Only correct answer explodes
+  var emitter = game.add.emitter(0, 0, 100);
+
+  emitter.makeParticles('heart-tiny');
+  emitter.gravity = 300;
+
+  emitter.x = this.x;
+  emitter.y = this.y;
+
+  //  The first parameter sets the effect to "explode" which means all particles are emitted at once
+  //  The second gives each particle a 2000ms lifespan
+  //  The third is ignored when using burst/explode mode
+  //  The final parameter (10) is how many particles will be emitted in this single burst
+  emitter.start(true, 4000, null, 25);
 
   // when done with particles
   this.destroy();
 };
 
-Asteroid.prototype.stop = function() {
-
-};
-
 Asteroid.prototype.resize = function () {
   // @todo: update position when screen is resized
 };
-
-// var AsteroidGroup = function(number) {
-//   this.number = number;
-//
-//   this.create.call(this);
-// };
-//
-// AsteroidGroup.prototype = {
-//   asteroids: [],
-//
-//   create: function() {
-//     for (var i = 0; i < this.number, i++) {
-//
-//     }
-//   }
-// };
