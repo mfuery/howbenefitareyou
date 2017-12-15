@@ -107,7 +107,9 @@ GameState.prototype = {
       strokeThickness: 10
     });
     this.scoreText.anchor.x = 1;
+    this.scoreText.anchor.y = 0 ;
     this.scoreText.x = game.world.width;
+    this.scoreText.y = game.world.height - this.scoreText.height;
 
     var numAnswers = this.questions[this.currentQuestion].answers.length;
     var offsetX = ((game.world.width / numAnswers) / 2);
@@ -126,13 +128,14 @@ GameState.prototype = {
       align: 'center',
       font: '50px Signpainter',
       wordWrap: true,
-      wordWrapWidth: (game.world.width - 30),
+      wordWrapWidth: (game.world.width - (game.world.width * .05)),
       stroke: 'rgba(255, 56, 112, 20)',
       fill: 'rgba(255, 243, 244, 0.85)',
       strokeThickness: 3,
     };
 
-    this.questionText = game.add.text(game.world.centerX, 70, this.questions[this.currentQuestion].question, questionStyle);
+    this.questionText = game.add.text(game.world.centerX, 5, this.questions[this.currentQuestion].question, questionStyle);
+    this.questionText.lineSpacing = -this.questionText.fontSize * .5;
     this.questionText.anchor.x = 0.5;
 
     game.eventDispatcher.add(this.handleEvent, this);
