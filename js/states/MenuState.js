@@ -4,18 +4,26 @@ var MenuState = function (game) {
 
 MenuState.prototype = {
 
+  /**
+   * Setup menu display objects.
+   */
   create: function () {
     console.log('createMenuState');
-    this.game.add.plugin(Phaser.Plugin.Debug);
-    this.game.add.plugin(Phaser.Plugin.Inspector);
-    this.game.add.plugin(PhaserSuperStorage.StoragePlugin);
-    this.game.add.plugin(PhaserInput.Plugin);
 
-    this.background = this.game.add.image(0, 0, 'outerspace');
-    this.background.anchor.set(0.5);
-    this.background.scale.setTo(getGameScale());
-    this.background.x = this.game.world.centerX;
-    this.background.y = this.game.world.centerY;
+    this.background = new Background(game);
+
+
+
+    this.ground = new Ground(game);
+
+    this.start = game.add.button(0, 0, 'lift-off', this.startGame);
+    this.start.anchor.set(0.5);
+    this.start.scale.setTo(Utils.getGameScaleX());
+    this.start.x = this.game.world.centerX;
+    this.start.y = this.game.world.centerY;
+
+    // @todo: add title and button text
+
   },
 
   /**
@@ -23,7 +31,7 @@ MenuState.prototype = {
    */
   startGame: function () {
     // @todo: add button to call this function
-    this.game.state.start("Main");
+    this.game.state.start("game");
   },
 
   resize: function() {
