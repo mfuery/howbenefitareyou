@@ -81,7 +81,7 @@ GameState.prototype = {
       this.score = score;
     }
 
-    if (this.currentQuestion > this.totalQuestions) {
+    if (this.currentQuestion >= this.totalQuestions) {
       this.showResults();
     }
 
@@ -96,9 +96,6 @@ GameState.prototype = {
    * Generates the display objects and data needed for the current state.
    */
   create: function () {
-    if (this.currentQuestion === 1) {
-      //return;
-    }
     this.background = new Background(game);
     this.ground = new Ground(game);
     this.missile = new Missile(game);
@@ -136,14 +133,13 @@ GameState.prototype = {
     };
 
     this.questionText = game.add.text(game.world.centerX, 70, this.questions[this.currentQuestion].question, questionStyle);
-    this.questionText.anchor.set(0.5);
+    this.questionText.anchor.x = 0.5;
 
     game.eventDispatcher.add(this.handleEvent, this);
 
     this.game.eventDispatcher.dispatch({eventType: 'dropNow'});
 
 
-    this.score = 8;
 //     this.showResults();
     // test answered event
     //game.eventDispatcher.dispatch({eventType: 'answered', asteroid: this.asteroids[0], state: this});
