@@ -46,6 +46,17 @@ GameState.prototype = {
       }));
     }
 
+    this.background = new Background(game);
+
+    this.ground = new Ground(game);
+
+    this.asteroids.push(new Asteroid(game, 0, 0));
+    this.asteroids.push(new Asteroid(game, 50, 50));
+    this.asteroids.push(new Asteroid(game, 100, 100));
+    this.asteroids.push(new Asteroid(game, 200, 200));
+
+    this.missile = new Missile(game);
+
     /* @todo:
     - Happens at State startup. Generates the random selection of questions for the current round.
     - Creates the background
