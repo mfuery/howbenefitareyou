@@ -101,9 +101,6 @@ GameState.prototype = {
    * Generates the display objects and data needed for the current state.
    */
   create: function () {
-    if (this.currentQuestion === 1) {
-      //return;
-    }
     this.background = new Background(game);
     this.ground = new Ground(game);
     this.missile = new Missile(game);
@@ -111,7 +108,9 @@ GameState.prototype = {
     this.scoreText = game.add.text(0, 0, 'SCORE: ' + this.score + "/" + this.totalQuestions,
       gameConfig.fontStyles.white);
     this.scoreText.anchor.x = 1;
+    this.scoreText.anchor.y = 0 ;
     this.scoreText.x = game.world.width;
+    this.scoreText.y = game.world.height - this.scoreText.height;
 
     var numAnswers = this.questions[this.currentQuestion].answers.length;
     var offsetX = ((game.world.width / numAnswers) / 2);
@@ -126,8 +125,8 @@ GameState.prototype = {
       this.asteroids[i].bringToTop();
     }
 
-    this.questionText = game.add.text(game.world.centerX, 70,
-      this.questions[this.currentQuestion].question, gameConfig.fontStyles.question);
+    this.questionText = game.add.text(game.world.centerX, 0, this.questions[this.currentQuestion].question, gameConfig.fontStyles.question);
+    this.questionText.lineSpacing = -this.questionText.fontSize * .5;
     this.questionText.anchor.x = 0.5;
 
     game.eventDispatcher.add(this.handleEvent, this);
