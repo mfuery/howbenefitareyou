@@ -9,9 +9,9 @@ BootState.prototype = {
   },
 
   create: function () {
-    if (!window.location.href.indexOf('herokuapp')) {
-      // this.game.add.plugin(Phaser.Plugin.Debug);
-      // game.add.plugin(Phaser.Plugin.Inspector);
+    if (isDebug) {
+      this.game.add.plugin(Phaser.Plugin.Debug);
+      game.add.plugin(Phaser.Plugin.Inspector);
     }
     game.add.plugin(PhaserSuperStorage.StoragePlugin);
     game.add.plugin(PhaserInput.Plugin);
