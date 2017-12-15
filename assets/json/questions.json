@@ -38,15 +38,6 @@
     ]
   },
   {
-    "question": "TODO: Ask questions about what \"contouring\" is",
-    "answers": [
-      {
-        "text": "TODO: more choices",
-        "score": 0
-      }
-    ]
-  },
-  {
     "question": "Which of these products can be used to correct undereye color?",
     "answers": [
       {
@@ -300,7 +291,7 @@
     "answers": [
       {
         "text": "benetit lip stain",
-        "score": 0
+        "score": 1
       },
       {
         "text": "lip stick",

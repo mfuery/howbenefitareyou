@@ -4,6 +4,17 @@ var MenuState = function (game) {
 
 MenuState.prototype = {
 
+  score: null,
+
+  isResults: false,
+
+  init: function(score) {
+    if (score !== undefined) {
+      this.isResults = true;
+      this.score = score;
+    }
+  },
+
   /**
    * Setup menu display objects.
    */
@@ -19,8 +30,11 @@ MenuState.prototype = {
     this.start.x = this.game.world.centerX;
     this.start.y = this.game.world.centerY;
 
-    // @todo: add title and button text
-    this.start.title = game.add.text(game.world.centerX, game.world.centerY - (this.start.height * .77), 'How Benefit Are You?', {
+    var titleText = 'How Benefit Are You?';
+    if (this.isResults) {
+      titleText = 'Thanks your playing!\nFinal Score: ' + this.score + ' / 10';
+    }
+    this.start.title = game.add.text(game.world.centerX, game.world.centerY - (this.start.height * .77), titleText, {
       font: '30px Signpainter',
       fill: '#fff'
     });
@@ -41,8 +55,12 @@ MenuState.prototype = {
     //  And apply to the Text
     this.start.title.fill = grd;
 
-    // @todo: add title and button text
-    this.start.button = game.add.text(game.world.centerX, game.world.centerY, 'START', {
+
+    var buttonText = 'START';
+    if (this.isResults) {
+      buttonText = 'Play \nAgain';
+    }
+    this.start.button = game.add.text(game.world.centerX, game.world.centerY, buttonText, {
       font: '30px Helvetica',
       fill: '#FF94FF'
     });
@@ -58,8 +76,9 @@ MenuState.prototype = {
    * Called from button press
    */
   startGame: function () {
-    // @todo: add button to call this function
-    this.game.state.start('game');
+    this.game.state.remove('game');
+    game.state.add('game', GameState);
+    this.game.state.start('game', true);
   },
 
   resize: function() {
