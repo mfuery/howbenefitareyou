@@ -66,6 +66,7 @@ GameState.prototype = {
     - Creates missile entity
     - Creates the score entity
     */
+    this.questions = this.generateQuestions(10);
     for (var i = 0; i < this.game.difficulty; i++) {
       this.asteroids.push(new Asteroid(game, {
         startX: ((this.game.world.width / this.game.difficulty) * i) + 25
@@ -156,7 +157,7 @@ GameState.prototype = {
     - calls updateScore if selected answer was correct
     - calls showResults if no more questions in current round
     */
-    this.game.eventDispatcher.dispatch({eventType: 'beginFalling'});
+    this.game.eventDispatcher.dispatch({eventType: 'dropNow'});
   },
 
   /**
