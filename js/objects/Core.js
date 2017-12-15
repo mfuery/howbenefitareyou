@@ -53,7 +53,7 @@ Core.prototype.handleEvent = function(event) {
  * @param event
  */
 Core.prototype.handleAnswered = function(event) {
-  console.log('Core: event' + event.eventType);
+  //console.log('Core handleAnswered');
 
   if (this.asteroid === event.asteroid) {
     this.isClicked = true;

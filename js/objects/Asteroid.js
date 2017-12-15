@@ -60,8 +60,6 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
 
   textObject: null,
 
-  firstUpdate: false,
-
   update: function () {
     if (this.body) {
       this.body.gravity.y = this.settings.verticalSpeed;

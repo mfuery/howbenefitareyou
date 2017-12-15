@@ -45,6 +45,8 @@ GameState.prototype = {
    */
   missile: null,
 
+  isScoring: false,
+
   /**
    * Creates new game round.
    *
@@ -82,6 +84,12 @@ GameState.prototype = {
     if (this.currentQuestion > this.totalQuestions) {
       this.showResults();
     }
+
+    this.isScoring = false;
+    this.asteroids = [];
+    this.cores = [];
+    this.missile = null;
+    this.scoreText = null;
   },
 
   /**
@@ -141,11 +149,11 @@ GameState.prototype = {
    * @param event object {eventType:<>, score:<>}
    */
   handleEvent: function(event) {
-    console.log('GameState event: ' + event.eventType);
 
     // If 'scored' event from core, it means core animation done.
     switch(event.eventType) {
       case 'scored':
+        console.log('GameState event: ' + event.eventType);
         if (this.isScoring) {
           return;
         }
@@ -192,6 +200,7 @@ GameState.prototype = {
    * Updates the GameState.score property and updates the score entity
    */
   updateScore: function (score) {
+    console.log('UPDATE SCORE');
     this.currentQuestion++;
     this.score += score;
     this.game.state.clearCurrentState();
