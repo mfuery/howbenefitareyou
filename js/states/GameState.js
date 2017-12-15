@@ -96,16 +96,15 @@ GameState.prototype = {
    * Generates the display objects and data needed for the current state.
    */
   create: function () {
+    if (this.currentQuestion === 1) {
+      //return;
+    }
     this.background = new Background(game);
     this.ground = new Ground(game);
     this.missile = new Missile(game);
 
-    this.scoreText = game.add.text(0, 0, 'SCORE: ' + this.score + "/" + this.totalQuestions, {
-      font: '30px Courier',
-      fill: '#fff',
-      stroke: '#000',
-      strokeThickness: 10
-    });
+    this.scoreText = game.add.text(0, 0, 'SCORE: ' + this.score + "/" + this.totalQuestions,
+      gameConfig.fontStyles.white);
     this.scoreText.anchor.x = 1;
     this.scoreText.x = game.world.width;
 
@@ -122,27 +121,25 @@ GameState.prototype = {
       this.asteroids[i].bringToTop();
     }
 
-    var questionStyle = {
-      align: 'center',
-      font: '50px Signpainter',
-      wordWrap: true,
-      wordWrapWidth: (game.world.width - 30),
-      stroke: 'rgba(255, 56, 112, 20)',
-      fill: 'rgba(255, 243, 244, 0.85)',
-      strokeThickness: 3,
-    };
-
-    this.questionText = game.add.text(game.world.centerX, 70, this.questions[this.currentQuestion].question, questionStyle);
+    this.questionText = game.add.text(game.world.centerX, 70,
+      this.questions[this.currentQuestion].question, gameConfig.fontStyles.question);
     this.questionText.anchor.x = 0.5;
 
     game.eventDispatcher.add(this.handleEvent, this);
 
-    this.game.eventDispatcher.dispatch({eventType: 'dropNow'});
-
-
-//     this.showResults();
-    // test answered event
-    //game.eventDispatcher.dispatch({eventType: 'answered', asteroid: this.asteroids[0], state: this});
+    // Countdown timer
+    var countdownDuration = Phaser.Timer.SECOND * 5;
+    setTimeout(function() {
+      this.game.eventDispatcher.dispatch({eventType: 'dropNow'});
+    }.bind(this), countdownDuration);
+    this.cdTimer = game.time.create();
+    this.cdTimerEvent = this.cdTimer.add(countdownDuration, function() {
+      this.cdTimer.stop();
+    }.bind(this), this);
+    this.cdTimer.start();
+    this.cdText = this.game.add.text(this.game.world.centerX,
+      this.game.world.centerY - (this.game.world.height / 4), '', gameConfig.fontStyles.white);
+    this.cdText.alpha = 1;
 
     // new Hint(this.game, this.game.world.centerX, this.game.world.centerY,
     //   'Fire at the asteroid with the correct answer');
@@ -222,5 +219,17 @@ GameState.prototype = {
 
   shutdown: function () {
     console.log('shutting down gamestate', this);
+  },
+
+  render: function() {
+    if (this.cdTimer.running) {
+      var secondsRemaining = Math.round((this.cdTimerEvent.delay - this.cdTimer.ms) / 1000);
+      this.cdText.text = '' + secondsRemaining;
+      if (secondsRemaining < 1) {
+        this.cdText.text = 'GO!'
+      }
+    } else {
+      this.cdText.alpha = 0;
+    }
   }
 };

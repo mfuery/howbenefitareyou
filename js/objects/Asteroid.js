@@ -12,13 +12,12 @@ var Asteroid = function (game, settings) {
   var sprites = ['asteroid', 'asteroid-2', 'asteroid-3'];
   var rotations = [0.001, 0.002, 0.003, 0.004, 0.005];
 
-  Phaser.Sprite.call(this, game, this.settings.startX, this.settings.startY, "asteroid");
-
   if (!this.settings.sprite) {
     // Choose random sprite
     this.settings.sprite = sprites[Math.floor(Math.random() * sprites.length)];
   }
 
+  Phaser.Sprite.call(this, game, this.settings.startX, this.settings.startY, this.settings.sprite);
   game.add.existing(this);
 
   this.setAnswer(this.settings.textValue, this.settings.isCorrect);
@@ -30,10 +29,6 @@ var Asteroid = function (game, settings) {
   // This is velocity via arcade physics
   this.game.physics.arcade.enable(this);
   this.settings.rotationSpeed = rotations[Math.floor(Math.random() * rotations.length)] * (Math.random() > 0.5 ? -1 : 1);
-    // this.game.difficulty * 20 +
-    // (this.game.difficulty * Math.floor(Math.random() * 10)
-    //   * (Math.random() > 0.5 ? -1 : 1));
-  //console.log(['vSpeed/rotation:',' ', this.settings.verticalSpeed, '/', this.settings.rotationSpeed].join('/'));
 
   // Sounds
   this.soundExplosion1 = this.game.add.audio('explosion-1');
@@ -61,15 +56,16 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
   textObject: null,
 
   update: function () {
-    if (this.body) {
-      this.body.gravity.y = this.settings.verticalSpeed;
-    }
+    this.body.gravity.y = this.settings.verticalSpeed;
     this.rotation += this.settings.rotationSpeed;
     this.textObject.rotation -= this.settings.rotationSpeed;
 
     if (this.isAlive && this.y > game.world.height - (20 * Utils.getGameScaleY())) {
       this.isAlive = false;
-      this.explode();
+      this.game.eventDispatcher.dispatch({eventType: 'detonate', asteroid: this});
+      // @todo Decide how to move on to the next question if the asteroids hit
+      // the floor.
+      //this.game.eventDispatcher.dispatch({eventType: 'scored', score: 0});
     }
   },
 
@@ -80,11 +76,11 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
    */
   setAnswer: function(text, isCorrect) {
     console.log(text);
-    var asteriodTextWidth = (this.width * 1.3);
+    var asteroidTextWidth = (this.width * 1.3);
     var style = {
       align: 'center',
       wordWrap: true,
-      wordWrapWidth: asteriodTextWidth,
+      wordWrapWidth: asteroidTextWidth,
       backgroundColor: 'rgba(255, 115, 128, 0)',
       stroke: 'rgba(255, 243, 244, 0.95)',
       strokeThickness: 3,
@@ -105,21 +101,21 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
    * @param event
    */
   handleEvent: function(event) {
-    console.log('Asteroid event: ', event.eventType, this.x);
+    // console.log('Asteroid event: ', event.eventType, this.x);
 
     switch(event.eventType) {
       case 'dropNow':
         var beginTween = this.game.add.tween(this)
           .to({alpha:1}, 2000, Phaser.Easing.Linear.None).start();
 
-        beginTween.onComplete.add(function(event) {
-          console.log('beginTween complete')
+        beginTween.onComplete.add(function() {
           this.settings.verticalSpeed =  50 + (Math.random() * 20);
         }, this);
         break;
 
       case 'answered':
         this.settings.verticalSpeed = 0;
+        this.body.stop();
         break;
 
       case 'detonate':

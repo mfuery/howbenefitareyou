@@ -37,7 +37,22 @@ BootState.prototype = {
         wordWrapWidth: (game.world.width - 30),
         stroke: 'rgba(255, 56, 112, 10)',
         fill: 'rgba(255, 243, 244, 0.85)',
-        strokeThickness: 3,
+        strokeThickness: 3
+      },
+      white: {
+        font: '30px Courier',
+        fill: '#fff',
+        stroke: '#000',
+        strokeThickness: 10
+      },
+      question: {
+        align: 'center',
+        font: '50px Signpainter',
+        wordWrap: true,
+        wordWrapWidth: (game.world.width - 30),
+        fill: 'rgba(255, 56, 112, 20)',
+        stroke: 'rgba(255, 243, 244, 0.85)',
+        strokeThickness: 3
       }
     };
     gameConfig.gameBaseFontSize = gameBaseFontSize;
