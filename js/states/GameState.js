@@ -41,32 +41,10 @@ GameState.prototype = {
    * Generates the display objects and data needed for the current state.
    */
   create: function () {
-    game.add.plugin(Phaser.Plugin.Debug);
-    //game.add.plugin(Phaser.Plugin.Inspector);
-    game.add.plugin(PhaserSuperStorage.StoragePlugin);
-    game.add.plugin(PhaserInput.Plugin);
-
-
-    for (var i = 0; i < this.game.difficulty; i++) {
-      this.asteroids.push(new Asteroid(game, {
-        startX: ((this.game.world.width / this.game.difficulty) * i) + 25
-      }));
-    }
-
-    // @todo: do gameState create stuff here.
-
     this.background = new Background(game);
     this.ground = new Ground(game);
     this.questions = this.generateQuestions(10);
-
-    this.asteroids.push(new Asteroid(game, 0, 0));
-    this.asteroids.push(new Asteroid(game, 50, 50));
-    this.asteroids.push(new Asteroid(game, 100, 100));
-    this.asteroids.push(new Asteroid(game, 200, 200));
-
     this.missile = new Missile(game);
-
-
 
     /* @todo:
     - Happens at State startup. Generates the random selection of questions for the current round.
@@ -76,6 +54,12 @@ GameState.prototype = {
     - Creates player launcher entity
     - Creates the score entity
     */
+    for (var i = 0; i < this.game.difficulty; i++) {
+      this.asteroids.push(new Asteroid(game, {
+        startX: ((this.game.world.width / this.game.difficulty) * i) + 25
+      }));
+      // this.asteroids[i].
+    }
 
   },
 
