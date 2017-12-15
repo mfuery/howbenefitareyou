@@ -70,7 +70,7 @@ GameState.prototype = {
       this.asteroids.push(new Asteroid(game, {
         startX: ((this.game.world.width / this.game.difficulty) * i) + 25
       }));
-      this.asteroids[i].setAnswer('Helloworld');
+      this.asteroids[i].setAnswer('Helloworld', false);
     }
 
     this.questionText = game.add.text(0, 0, 'something', {
@@ -157,7 +157,7 @@ GameState.prototype = {
     - calls updateScore if selected answer was correct
     - calls showResults if no more questions in current round
     */
-    this.game.eventDispatcher.dispatch({eventType: 'beginFalling'});
+    this.game.eventDispatcher.dispatch({eventType: 'dropNow'});
   },
 
   /**

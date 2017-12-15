@@ -41,7 +41,11 @@ var Asteroid = function (game, settings) {
   // Events
   this.game.eventDispatcher.add(this.handleEvent, this);
 
-  this.game.input.onDown.add(this.explode, this);
+  // When debugging: click to detonate
+  this.game.input.onDown.add(function() {
+    this.game.eventDispatcher.dispatch({eventType: 'answered'});
+    this.game.eventDispatcher.dispatch({eventType: 'detonate'});
+  }, this);
 };
 
 Asteroid.prototype = Object.create(Phaser.Sprite.prototype);
@@ -55,7 +59,6 @@ Asteroid.prototype.update = function () {
   this.textObject.rotation -= this.settings.rotationSpeed;
 
   if (this.isAlive && this.y > game.world.height - (20 * Utils.getGameScaleY())) {
-    this.soundExplosion1.play();
     this.isAlive = false;
     this.explode();
   }
@@ -70,16 +73,21 @@ Asteroid.prototype.setAnswer = function(text, isCorrect) {
   this.textObject = new Phaser.Text(this.game, 0, 0, text, {
     'backgroundColor': '#ff7380'
   });
+  this.textObject.anchor.set(0.5);
   this.addChild(this.textObject);
 
   this.isCorrect = isCorrect;
 };
 
+/**
+ *
+ * @param event
+ */
 Asteroid.prototype.handleEvent = function(event) {
   console.log('Asteroid event: ' + event.eventType);
 
   switch(event.eventType) {
-    case 'beginFalling':
+    case 'dropNow':
       var beginTween = this.game.add.tween(this)
         .to({alpha:1}, 2000, Phaser.Easing.Linear.None).start();
 
@@ -92,32 +100,36 @@ Asteroid.prototype.handleEvent = function(event) {
       this.settings.verticalSpeed = 0;
       break;
 
-    case 'blowUp':
+    case 'detonate':
       if (this.isCorrect) {
-        // burst of hearts
+        // burst of gold glitter
         this.explode();
-        // pink heart
-        this.game.eventDispatcher.dispatch({eventType: 'asteroidDone', score: 1});
-      } else {
-        // fade out
-        var tween = this.game.add.tween(this).to({alpha: 0}, 1000, Phaser.Easing.Linear.None).start();
-
-        // Red X
-        tween.onComplete.add(function() {
-          this.eventDispatcher.dispatch({eventType: 'blownUp'});
-        }, this);
+        this.alpha = 0;
       }
+      // fade out
+      var tween = this.game.add.tween(this)
+        .to({alpha: 0}, 1000, Phaser.Easing.Linear.None).start();
+
+      tween.onComplete.add(function() {
+        console.log('Asteroid: vaporized');
+        this.game.eventDispatcher.dispatch({eventType: 'vaporized'});
+        // when done with particles
+        this.destroy();
+      }, this);
       break;
 
     default: break;
   }
 };
 
+/**
+ * Explosion animation
+ */
 Asteroid.prototype.explode = function() {
-  // @todo particle fx! Only correct answer explodes
+  // Particle fx! Only correct answer explodes
   var emitter = game.add.emitter(0, 0, 100);
 
-  emitter.makeParticles('heart-tiny');
+  emitter.makeParticles(['gold-1', 'gold-2', 'gold-3', 'gold-4'], undefined, 40, false, true);
   emitter.gravity = 300;
 
   emitter.x = this.x;
@@ -127,12 +139,14 @@ Asteroid.prototype.explode = function() {
   //  The second gives each particle a 2000ms lifespan
   //  The third is ignored when using burst/explode mode
   //  The final parameter (10) is how many particles will be emitted in this single burst
-  emitter.start(true, 4000, null, 25);
+  emitter.start(true, 4000, null, 50);
 
-  // when done with particles
-  this.destroy();
+  this.soundExplosion1.play();
 };
 
+/**
+ *
+ */
 Asteroid.prototype.resize = function () {
   // @todo: update position when screen is resized
 };
