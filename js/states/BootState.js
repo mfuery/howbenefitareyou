@@ -9,6 +9,11 @@ BootState.prototype = {
   },
 
   create: function () {
+    this.game.add.plugin(Phaser.Plugin.Debug);
+    game.add.plugin(Phaser.Plugin.Inspector);
+    game.add.plugin(PhaserSuperStorage.StoragePlugin);
+    game.add.plugin(PhaserInput.Plugin);
+
     //this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     //this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
     //this.scale.setScreenSize(true);

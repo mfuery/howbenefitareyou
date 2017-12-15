@@ -1,5 +1,4 @@
 var GameState = function (game) {
-
 };
 
 GameState.prototype = {
@@ -36,11 +35,16 @@ GameState.prototype = {
    * Generates the display objects and data needed for the current state.
    */
   create: function () {
-
+    console.log('createGameState');
 
     // @todo: do gameState create stuff here.
-
     this.generateQuestions();
+
+    for (var i = 0; i < this.game.difficulty; i++) {
+      this.asteroids.push(new Asteroid(game, {
+        startX: ((this.game.world.width / this.game.difficulty) * i) + 25
+      }));
+    }
 
     this.background = new Background(game);
 
@@ -52,8 +56,6 @@ GameState.prototype = {
     this.asteroids.push(new Asteroid(game, 200, 200));
 
     this.missile = new Missile(game);
-
-
 
     /* @todo:
     - Happens at State startup. Generates the random selection of questions for the current round.
@@ -86,7 +88,6 @@ GameState.prototype = {
   update: function () {
     // @todo: Listen for player input and update and/or call functions as needed
     //updateScore();
-
   },
 
   /**
