@@ -4,13 +4,6 @@ var GameState = function (game) {
 
 GameState.prototype = {
 
-  // @todo: is this needed? Can just pull from preloaded JSON asset?
-  /**
-   * JSON array of question data with associated answers with a property for the
-   * "correct" answer.
-   */
-  questionData: [],
-
   /**
    * A random selection randomly ordered of 10 questions and answers from
    * QuestionData to be asked for the current round of gameplay.
@@ -20,7 +13,7 @@ GameState.prototype = {
   /**
    * Key of the current question being displayed.
    */
-  currentQuestion: 0,
+  currentQuestion: -1,
 
   /**
    * Numeric value storing the player's current score.
@@ -48,7 +41,7 @@ GameState.prototype = {
   create: function () {
     this.background = new Background(game);
     this.ground = new Ground(game);
-    this.questions = this.generateQuestions(10);
+    this.questions = this.generateQuestions(10);1
     this.missile = new Missile(game);
 
     this.scoreText = game.add.text(0, 0, 'SCORE: ' + this.score, {
@@ -74,6 +67,12 @@ GameState.prototype = {
       // this.asteroids[i].
     }
 
+    this.questionText = game.add.text(0, 0, 'something', {
+      font: '30px Courier',
+      fill: '#fff'
+    });
+    this.questions = this.generateQuestions(10);
+    this.showNextQuestion();
   },
 
   /**
@@ -116,6 +115,12 @@ GameState.prototype = {
    * Goes to next index in Questions and performs logic related to displaying question and answer entities.
    */
   showNextQuestion: function () {
+    this.currentQuestion++;
+    var questionData = this.questions[this.currentQuestion];
+    this.questionText.text = questionData.question;
+    for (var i = 0; i <= questionData.answers.length ; i++) {
+      Asteroid.setAnswer(questionData.answers[i].text, questionData.answers[i].score);
+    }
     /* @todo:
     - Goes to next index in Questions and performs logic related to displaying question and answer entities.
     - Places instanced asteroid entities evenly positioned apart based on number of total answers for the current question.
