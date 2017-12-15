@@ -16,6 +16,11 @@ GameState.prototype = {
   currentQuestion: -1,
 
   /**
+   * The total number of rounds per game.
+   */
+  totalQuestions: 10,
+
+  /**
    * Numeric value storing the player's current score.
    */
   score: 0,
@@ -44,7 +49,7 @@ GameState.prototype = {
     this.questions = this.generateQuestions(10);1
     this.missile = new Missile(game);
 
-    this.scoreText = game.add.text(0, 0, 'SCORE: ' + this.score, {
+    this.scoreText = game.add.text(0, 0, '', {
       font: '30px Courier',
       fill: '#fff',
       stroke: '#000',
@@ -52,6 +57,7 @@ GameState.prototype = {
     });
     this.scoreText.anchor.x = 1;
     this.scoreText.x = game.world.width;
+    this.updateScore(0);
 
     /* @todo:
     - Happens at State startup. Generates the random selection of questions for the current round.
@@ -64,7 +70,7 @@ GameState.prototype = {
       this.asteroids.push(new Asteroid(game, {
         startX: ((this.game.world.width / this.game.difficulty) * i) + 25
       }));
-      // this.asteroids[i].
+      this.asteroids[i].setAnswer('Helloworld');
     }
 
     this.questionText = game.add.text(0, 0, 'something', {
@@ -73,6 +79,8 @@ GameState.prototype = {
     });
     this.questions = this.generateQuestions(10);
     this.showNextQuestion();
+
+    //game.eventDispatcher.dispatch({eventType: 'answered', asteroid: {}});
   },
 
   /**
@@ -109,6 +117,10 @@ GameState.prototype = {
     // @todo: Listen for player input and update and/or call functions as needed
     //updateScore();
 
+    // Asteroids
+    for (var i = 0; i < this.game.difficulty; i++) {
+      this.asteroids[i].update();
+    }
   },
 
   /**
@@ -116,10 +128,15 @@ GameState.prototype = {
    */
   showNextQuestion: function () {
     this.currentQuestion++;
+
+    if (this.currentQuestion > this.totalQuestions) {
+      this.showResults();
+    }
+
     var questionData = this.questions[this.currentQuestion];
     this.questionText.text = questionData.question;
     for (var i = 0; i <= questionData.answers.length ; i++) {
-      Asteroid.setAnswer(questionData.answers[i].text, questionData.answers[i].score);
+      //Asteroid.setAnswer(questionData.answers[i].text, questionData.answers[i].score);
     }
     /* @todo:
     - Goes to next index in Questions and performs logic related to displaying question and answer entities.
@@ -135,17 +152,14 @@ GameState.prototype = {
    */
   updateScore: function (score) {
     this.score += score;
-    this.scoreText.text = "SCORE: " + this.score;
+    this.scoreText.text = 'SCORE: ' + this.score + "/" + this.totalQuestions;
   },
 
   /**
    * Creates the ResultsState and passes the player's final score.
    */
   showResults: function () {
-    // @todo: Creates the ResultsState and passes the player's final score.
-    // @todo: triggers the StateManager to switch states (not sure how this works yet)
-
-    this.game.state.start('results');
+    this.game.state.start('results', true, false, this.score);
   }
 
 };

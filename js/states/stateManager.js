@@ -21,6 +21,8 @@ var gameConfig = {
 
 game = new Phaser.Game(gameConfig);
 
+game.eventDispatcher = new Phaser.Signal();
+
 game.state.add('boot', BootState);
 game.state.add('preload', PreloadState);
 game.state.add('menu', MenuState);
@@ -29,3 +31,5 @@ game.state.add('results', ResultsState);
 
 game.state.start('boot');
 game.difficulty = 4;
+
+isDebug = !(window.location.href.indexOf('herokuapp') > 0);
