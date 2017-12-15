@@ -1,4 +1,5 @@
 var GameState = function (game) {
+
 };
 
 GameState.prototype = {
@@ -35,27 +36,24 @@ GameState.prototype = {
    * Generates the display objects and data needed for the current state.
    */
   create: function () {
-    console.log('createGameState');
+    game.add.plugin(Phaser.Plugin.Debug);
+    //game.add.plugin(Phaser.Plugin.Inspector);
+    game.add.plugin(PhaserSuperStorage.StoragePlugin);
+    game.add.plugin(PhaserInput.Plugin);
+
+
 
     // @todo: do gameState create stuff here.
-    this.generateQuestions();
 
-    for (var i = 0; i < this.game.difficulty; i++) {
-      this.asteroids.push(new Asteroid(game, {
-        startX: ((this.game.world.width / this.game.difficulty) * i) + 25
-      }));
-    }
-
-    this.background = new Background(game);
-
-    this.ground = new Ground(game);
+    this.questions = this.generateQuestions(10);
 
     this.asteroids.push(new Asteroid(game, 0, 0));
     this.asteroids.push(new Asteroid(game, 50, 50));
     this.asteroids.push(new Asteroid(game, 100, 100));
     this.asteroids.push(new Asteroid(game, 200, 200));
 
-    this.missile = new Missile(game);
+
+
 
     /* @todo:
     - Happens at State startup. Generates the random selection of questions for the current round.
@@ -71,8 +69,21 @@ GameState.prototype = {
   /**
    * Generates the random selection of 10 questions for the current round.
    */
-  generateQuestions: function() {
-    // @todo: Generates the random selection of 10 questions for the current round.
+  generateQuestions: function(num_questions) {
+    var questions = game.cache.getJSON('questions');
+    var shuffled = questions.slice(0);
+    var i = questions.length;
+    var min = i - num_questions;
+    var temp;
+    var index;
+
+    while (i-- > min) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+    }
+    return shuffled.slice(min);
   },
 
   /**
@@ -88,6 +99,7 @@ GameState.prototype = {
   update: function () {
     // @todo: Listen for player input and update and/or call functions as needed
     //updateScore();
+
   },
 
   /**
