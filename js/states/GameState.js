@@ -48,6 +48,11 @@ GameState.prototype = {
   isScoring: false,
 
   /**
+   * Sounds added to game.
+   */
+  sounds: {},
+
+  /**
    * Creates new game round.
    *
    * @param questions
@@ -128,7 +133,8 @@ GameState.prototype = {
     game.eventDispatcher.add(this.handleEvent, this);
 
     // Countdown timer
-    var countdownDuration = Phaser.Timer.SECOND * 5;
+    var countdownDuration = 4999;
+    this.lastSecondsRemaining = countdownDuration;
     setTimeout(function() {
       this.game.eventDispatcher.dispatch({eventType: 'dropNow'});
     }.bind(this), countdownDuration);
@@ -140,6 +146,10 @@ GameState.prototype = {
     this.cdText = this.game.add.text(this.game.world.centerX,
       this.game.world.centerY - (this.game.world.height / 4), '', gameConfig.fontStyles.white);
     this.cdText.alpha = 1;
+
+    // Sounds
+    this.sounds.beep = this.game.add.audio('beep-1');
+    this.sounds.go = this.game.add.audio('go-1');
 
     // new Hint(this.game, this.game.world.centerX, this.game.world.centerY,
     //   'Fire at the asteroid with the correct answer');
@@ -226,8 +236,12 @@ GameState.prototype = {
       var secondsRemaining = Math.round((this.cdTimerEvent.delay - this.cdTimer.ms) / 1000);
       this.cdText.text = '' + secondsRemaining;
       if (secondsRemaining < 1) {
-        this.cdText.text = 'GO!'
+        this.cdText.text = 'GO!';
+        this.sounds.go.play();
+      } else if (this.lastSecondsRemaining != secondsRemaining) {
+        this.sounds.beep.play();
       }
+      this.lastSecondsRemaining = secondsRemaining;
     } else {
       this.cdText.alpha = 0;
     }
