@@ -55,21 +55,22 @@ MenuState.prototype = {
     //  And apply to the Text
     this.start.title.fill = grd;
 
+    var startButtonStyle = {
+      align: 'center',
+      font: 'Helvetica',
+      fontSize: (gameConfig.gameBaseFontSize * gameConfig.scale.x),
+      fontWeight: 'bold',
+      stroke: 'rgba(52, 52, 52, 1)',
+      fill: 'rgba(255, 148, 255, 1)',
+      strokeThickness: 2,
+    };
 
     var buttonText = 'START';
     if (this.isResults) {
       buttonText = 'Play \nAgain';
     }
-    this.start.button = game.add.text(game.world.centerX, game.world.centerY, buttonText, {
-      font: '30px Helvetica',
-      fill: '#FF94FF'
-    });
+    this.start.button = game.add.text(game.world.centerX, game.world.centerY, 'START', startButtonStyle);
     this.start.button.anchor.set(0.5);
-    this.start.button.align = 'center';
-    this.start.button.fontWeight = 'bold';
-    this.start.button.fontSize = 50;
-    this.start.button.stroke = '#343434';
-    this.start.button.strokeThickness = 2;
   },
 
   /**

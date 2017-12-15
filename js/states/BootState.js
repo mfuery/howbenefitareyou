@@ -22,10 +22,17 @@ BootState.prototype = {
     //Initial Load State
     game.state.start('preload');
 
+    gameConfig.scale = {
+      x: Utils.getGameScaleX(),
+      y: Utils.getGameScaleY()
+    };
+    var gameBaseFontSize = (gameConfig.baseFontSize * gameConfig.scale.x);
+
     gameConfig.fontStyles = {
       default: {
         align: 'center',
-        font: '50px Signpainter',
+        font: 'Signpainter',
+        fontSize: gameBaseFontSize,
         wordWrap: true,
         wordWrapWidth: (game.world.width - 30),
         stroke: 'rgba(255, 56, 112, 10)',
@@ -33,10 +40,7 @@ BootState.prototype = {
         strokeThickness: 3,
       }
     };
-    gameConfig.scale = {
-      x: Utils.getGameScaleX(),
-      y: Utils.getGameScaleY()
-    };
+    gameConfig.gameBaseFontSize = gameBaseFontSize;
 
     /* @todo need fullscreen switch
     if (game.input.keyboard.justPressed(Phaser.Keyboard.F)) {
