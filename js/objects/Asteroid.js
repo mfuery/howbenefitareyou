@@ -104,21 +104,23 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
         break;
 
       case 'detonate':
-        if (this.isCorrect) {
-          // burst of gold glitter
+        console.log(this, event.asteroid)
+        // burst of gold glitter
+        if (this === event.asteroid) {
           this.explode();
           this.alpha = 0;
-        }
-        // fade out
-        var tween = this.game.add.tween(this)
-          .to({alpha: 0}, 1000, Phaser.Easing.Linear.None).start();
+        } else {
+          // fade out
+          var tween = this.game.add.tween(this)
+            .to({alpha: 0}, 1000, Phaser.Easing.Linear.None).start();
 
-        tween.onComplete.add(function() {
-          console.log('Asteroid: vaporized');
-          this.game.eventDispatcher.dispatch({eventType: 'vaporized'});
-          // when done with particles
-          this.destroy();
-        }, this);
+          tween.onComplete.add(function() {
+            console.log('Asteroid: vaporized');
+            this.game.eventDispatcher.dispatch({eventType: 'vaporized'});
+            // when done with particles
+            this.destroy();
+          }, this);
+        }
         break;
 
       default: break;

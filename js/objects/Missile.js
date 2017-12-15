@@ -37,8 +37,8 @@ Missile.prototype.resize = function () {
  */
 Missile.prototype.handleEvent = function(event) {
   if (event.eventType === 'answered') {
-    console.log('this', this);
-    console.log('event.asteroid', event.asteroid);
+    // console.log('this', this);
+    // console.log('event.asteroid', event.asteroid);
     this.firing = true;
 
     this.rotation = this.game.physics.arcade.angleBetween(this, event.asteroid) + (90 * Phaser.Math.DEG_TO_RAD);
@@ -46,8 +46,8 @@ Missile.prototype.handleEvent = function(event) {
     var shootTween = game.add.tween(this).to({x: event.asteroid.position.x}, 500, Phaser.Easing.Exponential.In, true);
     game.add.tween(this).to({y: event.asteroid.position.y}, 500, Phaser.Easing.Exponential.In, true);
 
-    shootTween.onComplete.add(function (event) {
-      game.eventDispatcher.dispatch({eventType: 'detonate'});
+    shootTween.onComplete.add(function (tweenEvent) {
+      game.eventDispatcher.dispatch({eventType: 'detonate', asteroid: event.asteroid});
     }, this);
 
     // @todo: handle animation to keep going based on current rotation.
