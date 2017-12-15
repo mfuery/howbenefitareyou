@@ -33,11 +33,14 @@ GameState.prototype = {
   asteroids: [],
 
   /**
+   * Reference to the missile sprite instance.
+   */
+  missile: null,
+
+  /**
    * Generates the display objects and data needed for the current state.
    */
   create: function () {
-
-
     // @todo: do gameState create stuff here.
 
     this.generateQuestions();
