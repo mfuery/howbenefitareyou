@@ -100,9 +100,10 @@ GameState.prototype = {
     this.scoreText.x = game.world.width;
 
     var numAnswers = this.questions[this.currentQuestion].answers.length;
+    var offsetX = ((game.world.width / numAnswers) / 2);
     for (var i = 0; i < numAnswers; i++) {
       this.asteroids.push(new Asteroid(game, {
-        startX: ((this.game.world.width / numAnswers) * i) + 25
+        startX: ((this.game.world.width / numAnswers) * i) + offsetX
       }));
       this.asteroids[i].setAnswer(this.questions[this.currentQuestion].answers[i].text, this.questions[this.currentQuestion].answers[i].score);
 
