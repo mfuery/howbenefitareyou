@@ -1,5 +1,5 @@
 var Missile = function (game) {
-  Phaser.Sprite.call(this, game, 0, 0, "spaceship");
+  Phaser.Sprite.call(this, game, 0, 0, "rocket-small");
 
   game.add.existing(this);
 
@@ -37,22 +37,26 @@ Missile.prototype.resize = function () {
  */
 Missile.prototype.handleEvent = function(event) {
   if (event.eventType === 'answered') {
-    console.log('event', event);
-    console.log('this', this);
-    this.firing = true;
-
-    this.rotation = this.game.physics.arcade.angleBetween(this, event.asteroid) + (90 * Phaser.Math.DEG_TO_RAD);
-
-    game.add.tween(this).to({x: event.asteroid.position.x}, 500, Phaser.Easing.Exponential.In, true);
-    game.add.tween(this).to({y: event.asteroid.position.y}, 500, Phaser.Easing.Exponential.In, true);
-
-    //game.add.tween(this).to(position, 4000, Phaser.Easing.Bounce.Out, true);
-
-
-    //this.parent.game.add.tween(game.getCurrentState().missile).to({y: this.game.world.centerY}, 4000, Phaser.Easing.Bounce.Out, true);
-
-    //var tween = game.add.tween(missile).to({y: this.game.world.centerY}, 4000, Phaser.Easing.Bounce.Out, false);
-
+    this.handleAnswered(event);
   }
-}
+};
+
+/**
+ * Handle the "answered" event.
+ * @param event
+ */
+Missile.prototype.handleAnswered = function (event) {
+  this.firing = true;
+
+  this.rotation = this.game.physics.arcade.angleBetween(this, event.asteroid) + (90 * Phaser.Math.DEG_TO_RAD);
+
+  var shootTween = game.add.tween(this).to({x: event.asteroid.position.x}, 500, Phaser.Easing.Exponential.In, true);
+  game.add.tween(this).to({y: event.asteroid.position.y}, 500, Phaser.Easing.Exponential.In, true);
+
+  shootTween.onComplete.add(function (event) {
+    game.eventDispatcher.dispatch({eventType: 'detonate'});
+  }, this);
+
+  // @todo: handle animation to keep going based on current rotation.
+};
 
