@@ -125,10 +125,18 @@ GameState.prototype = {
       this.asteroids[i].bringToTop();
     }
 
-    this.questionText = game.add.text(0, 0, this.questions[this.currentQuestion].question, {
-      font: '30px Courier',
-      fill: '#fff'
-    });
+    var questionStyle = {
+      align: 'center',
+      font: '50px Signpainter',
+      wordWrap: true,
+      wordWrapWidth: (game.world.width - 30),
+      fill: 'rgba(255, 56, 112, 20)',
+      stroke: 'rgba(255, 243, 244, 0.85)',
+      strokeThickness: 3,
+    };
+
+    this.questionText = game.add.text(game.world.centerX, 70, this.questions[this.currentQuestion].question, questionStyle);
+    this.questionText.anchor.set(0.5);
 
     game.eventDispatcher.add(this.handleEvent, this);
 
