@@ -21,6 +21,8 @@ var gameConfig = {
 
 game = new Phaser.Game(gameConfig);
 
+game.eventDispatcher = new Phaser.Signal();
+
 game.state.add('boot', BootState);
 game.state.add('preload', PreloadState);
 game.state.add('menu', MenuState);

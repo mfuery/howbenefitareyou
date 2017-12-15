@@ -10,6 +10,8 @@ var Missile = function (game) {
   this.y = this.game.world.height - (this.height * .35);
 
   this.scale.x = this.scale.y = Utils.getGameScaleX();
+
+  game.eventDispatcher.add(this.handleEvent);
 };
 
 Missile.prototype = Object.create(Phaser.Sprite.prototype);
@@ -24,5 +26,13 @@ Missile.prototype.update = function () {
 
 Missile.prototype.resize = function () {
   // @todo: update position when screen is resized
+};
+
+Missile.prototype.handleEvent = function(event) {
+  console.log('event', event);
+  if (event.eventType == 'answered') {
+    var target = event.asteroid;
+    // @todo: fire ze missile
+  }
 };
 

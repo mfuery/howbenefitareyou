@@ -79,6 +79,8 @@ GameState.prototype = {
     });
     this.questions = this.generateQuestions(10);
     this.showNextQuestion();
+
+    //game.eventDispatcher.dispatch({eventType: 'answered', asteroid: {}});
   },
 
   /**
