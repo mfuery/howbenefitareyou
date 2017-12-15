@@ -53,7 +53,7 @@ PreloadState.prototype = {
     game.load.image('UFO', 'assets/img/UFO.png');
 
     // Videos
-    game.load.video('bigbang', 'assets/img/bigbang.mp4');
+    // game.load.video('bigbang', 'assets/img/bigbang.mp4');
 
     // Load your sounds, efx, music...
     game.load.audio('explosion-1', 'assets/mp3/explosion-1.mp3');

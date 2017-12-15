@@ -27,3 +27,4 @@ game.state.add('game', GameState);
 game.state.add('results', ResultsState);
 
 game.state.start('boot');
+game.difficulty = 4;
