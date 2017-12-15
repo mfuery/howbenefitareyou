@@ -12,13 +12,12 @@ var Asteroid = function (game, settings) {
   var sprites = ['asteroid', 'asteroid-2', 'asteroid-3'];
   var rotations = [0.001, 0.002, 0.003, 0.004, 0.005];
 
-  Phaser.Sprite.call(this, game, this.settings.startX, this.settings.startY, "asteroid");
-
   if (!this.settings.sprite) {
     // Choose random sprite
     this.settings.sprite = sprites[Math.floor(Math.random() * sprites.length)];
   }
 
+  Phaser.Sprite.call(this, game, this.settings.startX, this.settings.startY, this.settings.sprite);
   game.add.existing(this);
 
   this.setAnswer(this.settings.textValue, this.settings.isCorrect);
@@ -30,10 +29,6 @@ var Asteroid = function (game, settings) {
   // This is velocity via arcade physics
   this.game.physics.arcade.enable(this);
   this.settings.rotationSpeed = rotations[Math.floor(Math.random() * rotations.length)] * (Math.random() > 0.5 ? -1 : 1);
-    // this.game.difficulty * 20 +
-    // (this.game.difficulty * Math.floor(Math.random() * 10)
-    //   * (Math.random() > 0.5 ? -1 : 1));
-  //console.log(['vSpeed/rotation:',' ', this.settings.verticalSpeed, '/', this.settings.rotationSpeed].join('/'));
 
   // Sounds
   this.soundExplosion1 = this.game.add.audio('explosion-1');
@@ -67,7 +62,10 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
 
     if (this.isAlive && this.y > game.world.height - (20 * Utils.getGameScaleY())) {
       this.isAlive = false;
-      this.explode();
+      this.game.eventDispatcher.dispatch({eventType: 'detonate', asteroid: this});
+      // @todo Decide how to move on to the next question if the asteroids hit
+      // the floor.
+      //this.game.eventDispatcher.dispatch({eventType: 'scored', score: 0});
     }
   },
 

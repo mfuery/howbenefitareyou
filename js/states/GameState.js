@@ -141,10 +141,6 @@ GameState.prototype = {
       this.game.world.centerY - (this.game.world.height / 4), '', gameConfig.fontStyles.white);
     this.cdText.alpha = 1;
 
-//     this.showResults();
-    // test answered event
-    //game.eventDispatcher.dispatch({eventType: 'answered', asteroid: this.asteroids[0], state: this});
-
     // new Hint(this.game, this.game.world.centerX, this.game.world.centerY,
     //   'Fire at the asteroid with the correct answer');
   },
