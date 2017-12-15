@@ -41,19 +41,19 @@
     "question": "Which of these products can be used to correct undereye color?",
     "answers": [
       {
-        "text": "Little Correctors Set https://www.benefitcosmetics.com/uk/en-gb/product/lifes-little-correctors",
+        "text": "Little Correctors Set",
         "score": 1
       },
       {
-        "text": "boi-ing industrial strength concealer https://www.benefitcosmetics.com/us/en/product/boi-ing-industrial-strength-concealer",
+        "text": "boi-ing industrial strength concealer",
         "score": 0
       },
       {
-        "text": "Lemon Aid https://www.benefitcosmetics.com/us/en/product/lemon-aid",
+        "text": "Lemon Aid",
         "score": 0
       },
       {
-        "text": "benetint cheek & lip stain travel size mini https://www.benefitcosmetics.com/us/en/product/benetint-travel-size-mini",
+        "text": "benetint cheek & lip stain travel size mini",
         "score": 0
       }
     ]
@@ -88,10 +88,6 @@
       },
       {
         "text": "hoola bronzer",
-        "score": 0
-      },
-      {
-        "text": "TODO: more",
         "score": 0
       }
     ]
@@ -281,7 +277,7 @@
         "score": 1
       },
       {
-        "text": "TODO: other products",
+        "text": "Benetint",
         "score": 0
       }
     ]
@@ -315,7 +311,7 @@
         "score": 1
       },
       {
-        "text": "TODO: more choices",
+        "text": "Blowtorch",
         "score": 0
       }
     ]
@@ -345,19 +341,19 @@
     "question": "What product \"sets\" your foundation and helps it last longer?",
     "answers": [
       {
-        "text": "sConcealer",
+        "text": "Concealer",
         "score": 0
       },
       {
-        "text": "sEyebrow Pencil",
+        "text": "Eyebrow Pencil",
         "score": 0
       },
       {
-        "text": "sLipstick",
+        "text": "Lipstick",
         "score": 0
       },
       {
-        "text": "sPowder",
+        "text": "Powder",
         "score": 1
       }
     ]
@@ -366,19 +362,19 @@
     "question": "What product helps you define your eyebrows?",
     "answers": [
       {
-        "text": "sEyeliner",
+        "text": "Eyeliner",
         "score": 0
       },
       {
-        "text": "sMascara",
+        "text": "Mascara",
         "score": 0
       },
       {
-        "text": "sConcealer",
+        "text": "Concealer",
         "score": 0
       },
       {
-        "text": "s“precisely, my brow” Eyebrow Pencil",
+        "text": "\"precisely, my brow\" Eyebrow Pencil",
         "score": 1
       }
     ]
@@ -391,7 +387,7 @@
         "score": 1
       },
       {
-        "text": "TODO: more choices",
+        "text": "Cause allergic reactions",
         "score": 0
       }
     ]
@@ -404,7 +400,7 @@
         "score": 1
       },
       {
-        "text": "TODO: more choices",
+        "text": "Blowtorch",
         "score": 0
       }
     ]
@@ -438,7 +434,7 @@
         "score": 1
       },
       {
-        "text": "TODO: more choices",
+        "text": "Makeup causes sleep deprivation",
         "score": 0
       }
     ]
