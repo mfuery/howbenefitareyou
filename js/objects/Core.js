@@ -57,21 +57,15 @@ Core.prototype.handleEvent = function(event) {
  * @param event
  */
 Core.prototype.handleAnswered = function (event) {
-  console.log('Core: event' + event.eventType);
-
   if (this.asteroid === event.asteroid) {
-    console.log('*** SAME ASTEROID ***');
     this.isClicked = true;
   }
 
   this.x = this.asteroid.x;
   this.y = this.asteroid.y;
-
-  //game.eventDispatcher.dispatch({'eventType': 'scored', 'score': this.asteroid.});
 };
 
 Core.prototype.handleVaporized = function (event) {
-  console.log('Core: event' + event.eventType);
   // @todo: animate heart to top right.
   if (this.isClicked) {
     game.eventDispatcher.dispatch({

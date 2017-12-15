@@ -59,6 +59,9 @@ GameState.prototype = {
     console.log('currentQuestion', currentQuestion);
     console.log('totalQuestions', totalQuestions);
     console.log('score', score);
+
+    game.eventDispatcher.removeAll();
+
     this.questions = questions;
     if (questions === undefined) {
       this.questions = this.generateQuestions(10);
@@ -85,9 +88,11 @@ GameState.prototype = {
    * Generates the display objects and data needed for the current state.
    */
   create: function () {
+    if (this.currentQuestion === 1) {
+      //return;
+    }
     this.background = new Background(game);
     this.ground = new Ground(game);
-    this.questions = this.generateQuestions(10);
     this.missile = new Missile(game);
 
     this.scoreText = game.add.text(0, 0, 'SCORE: ' + this.score + "/" + this.totalQuestions, {
@@ -102,9 +107,10 @@ GameState.prototype = {
     var numAnswers = this.questions[this.currentQuestion].answers.length;
     for (var i = 0; i < numAnswers; i++) {
       this.asteroids.push(new Asteroid(game, {
-        startX: ((this.game.world.width / numAnswers) * i) + 25
+        startX: ((this.game.world.width / numAnswers) * i) + 25,
+        textValue: this.questions[this.currentQuestion].answers[i].text,
+        isCorrect: this.questions[this.currentQuestion].answers[i].score
       }));
-      this.asteroids[i].setAnswer(this.questions[this.currentQuestion].answers[i].text, this.questions[this.currentQuestion].answers[i].score);
 
       this.cores.push(new Core(game, this.asteroids[i]));
     }
@@ -130,11 +136,11 @@ GameState.prototype = {
     // If 'scored' event from core, it means core animation done.
     switch(event.eventType) {
       case 'scored':
+        if (this.isScoring) {
+          return;
+        }
         this.isScoring = true;
-        console.log('GameState: scored', event.eventType);
-        // animation heart to score
-        this.updateScore();
-        // check if show results
+        this.updateScore(event.score);
     }
   },
 
@@ -178,14 +184,20 @@ GameState.prototype = {
   updateScore: function (score) {
     this.currentQuestion++;
     this.score += score;
+    this.game.state.clearCurrentState();
     this.game.state.start('game', true, false, this.questions, this.currentQuestion, this.totalQuestions, this.score);
+    //this.game.state.restart(true, false, this.questions, this.currentQuestion, this.totalQuestions, this.score);
+    //this.game.state.start('transfer', true, false, this.questions, this.currentQuestion, this.totalQuestions, this.score);
   },
 
   /**
-   * Creates the ResultsState and passes the player's final score.
+   * Creates the MenuState and passes the player's final score.
    */
   showResults: function () {
-    this.game.state.start('results', true, false, this.score);
-  }
+    this.game.state.start('menu', true, false, this.score);
+  },
 
+  shutdown: function () {
+    console.log('shutting down gamestate', this);
+  }
 };

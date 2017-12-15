@@ -4,7 +4,9 @@ var Asteroid = function (game, settings) {
     startX: game.world.centerX, // in px
     verticalSpeed: 0,
     rotationSpeed: 0.05,
-    sprite: null
+    sprite: null,
+    textValue: 'DEFAULT VALUE',
+    isCorrect: 0
   }, settings);
 
   var sprites = ['asteroid', 'asteroid-2', 'asteroid-3'];
@@ -18,6 +20,8 @@ var Asteroid = function (game, settings) {
   }
 
   game.add.existing(this);
+
+  this.setAnswer(this.settings.textValue, this.settings.isCorrect);
 
   // Movement
   this.scale.x = this.scale.y = Utils.getGameScaleX();
@@ -42,6 +46,7 @@ var Asteroid = function (game, settings) {
   this.game.eventDispatcher.add(this.handleEvent, this);
   this.inputEnabled = true;
   this.events.onInputDown.add(function() {
+    console.log('INPUT DOWN', this.x);
     this.game.eventDispatcher.dispatch({eventType: 'answered', asteroid: this});
     this.wasChosen = true;
   }, this);
@@ -53,13 +58,16 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
 
   wasChosen: false,
 
+  textObject: null,
+
+  firstUpdate: false,
+
   update: function () {
     if (this.body) {
       this.body.gravity.y = this.settings.verticalSpeed;
     }
     this.rotation += this.settings.rotationSpeed;
     this.textObject.rotation -= this.settings.rotationSpeed;
-
     if (this.isAlive && this.y > game.world.height - (20 * Utils.getGameScaleY())) {
       this.isAlive = false;
       this.explode();
@@ -72,12 +80,15 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
    * @param isCorrect bool
    */
   setAnswer: function(text, isCorrect) {
-    console.log(text);
-    this.textObject = new Phaser.Text(this.game, 0, 0, text, {
-      'backgroundColor': '#ff7380'
-    });
+    console.log('text', text);
+    //this.textObject = new Phaser.Text(game, 0, 0, text, {'backgroundColor': '#ff7380'});
+    this.textObject = game.add.text(0, 0, text, {'backgroundColor': '#ff7380'});
     this.textObject.anchor.set(0.5);
+    //this.textObject.x = this.x;
+    //this.textObject.y = this.y;
     this.addChild(this.textObject);
+
+
 
     this.isCorrect = isCorrect;
   },
@@ -87,7 +98,7 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
    * @param event
    */
   handleEvent: function(event) {
-    console.log('Asteroid event: ' + event.eventType);
+    console.log('Asteroid event: ', event.eventType, this.x);
 
     switch(event.eventType) {
       case 'dropNow':
@@ -104,7 +115,6 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
         break;
 
       case 'detonate':
-        console.log(this, event.asteroid)
         // burst of gold glitter
         if (this === event.asteroid) {
           this.explode();
@@ -112,10 +122,9 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
         } else {
           // fade out
           var tween = this.game.add.tween(this)
-            .to({alpha: 0}, 1000, Phaser.Easing.Linear.None).start();
+            .to({alpha: 0}, 1000, Phaser.Easing.Linear.None, true);
 
           tween.onComplete.add(function() {
-            console.log('Asteroid: vaporized');
             this.game.eventDispatcher.dispatch({eventType: 'vaporized'});
             // when done with particles
             this.destroy();
@@ -154,5 +163,9 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
    */
   resize: function () {
     // @todo: update position when screen is resized
+  },
+
+  shutdown: function() {
+
   }
 });
