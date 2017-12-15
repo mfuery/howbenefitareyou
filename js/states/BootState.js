@@ -48,7 +48,10 @@ BootState.prototype = {
         strokeThickness: 3
       }
     };
-
+    gameConfig.scale = {
+      x: Utils.getGameScaleX(),
+      y: Utils.getGameScaleY()
+    };
 
     /* @todo need fullscreen switch
     if (game.input.keyboard.justPressed(Phaser.Keyboard.F)) {
