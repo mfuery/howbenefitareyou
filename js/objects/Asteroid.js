@@ -1,6 +1,6 @@
 var Asteroid = function (game, settings) {
   this.settings = Object.assign({
-    startY: 200, // in px
+    startY: 250, // in px
     startX: game.world.centerX, // in px
     verticalSpeed: 0,
     rotationSpeed: 0.05,
