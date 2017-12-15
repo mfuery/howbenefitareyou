@@ -22,21 +22,40 @@ BootState.prototype = {
     //Initial Load State
     game.state.start('preload');
 
-    gameConfig.fontStyles = {
-      default: {
-        align: 'center',
-        font: '50px Signpainter',
-        wordWrap: true,
-        wordWrapWidth: (game.world.width - 30),
-        stroke: 'rgba(255, 56, 112, 10)',
-        fill: 'rgba(255, 243, 244, 0.85)',
-        strokeThickness: 3,
-      }
-    };
     gameConfig.scale = {
       x: Utils.getGameScaleX(),
       y: Utils.getGameScaleY()
     };
+    var gameBaseFontSize = (gameConfig.baseFontSize * gameConfig.scale.x);
+
+    gameConfig.fontStyles = {
+      default: {
+        align: 'center',
+        font: 'Signpainter',
+        fontSize: gameBaseFontSize,
+        wordWrap: true,
+        wordWrapWidth: (game.world.width - 30),
+        stroke: 'rgba(255, 56, 112, 10)',
+        fill: 'rgba(255, 243, 244, 0.85)',
+        strokeThickness: 3
+      },
+      white: {
+        font: '30px Courier',
+        fill: '#fff',
+        stroke: '#000',
+        strokeThickness: 10
+      },
+      question: {
+        align: 'center',
+        font: '50px Signpainter',
+        wordWrap: true,
+        wordWrapWidth: (game.world.width - 30),
+        fill: 'rgba(255, 56, 112, 20)',
+        stroke: 'rgba(255, 243, 244, 0.85)',
+        strokeThickness: 3
+      }
+    };
+    gameConfig.gameBaseFontSize = gameBaseFontSize;
 
     /* @todo need fullscreen switch
     if (game.input.keyboard.justPressed(Phaser.Keyboard.F)) {
