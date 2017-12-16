@@ -37,6 +37,8 @@ var Asteroid = function (game, settings) {
   //
   this.alpha = 0;
 
+  this.isFading = false;
+
   // Events
   this.game.eventDispatcher.add(this.handleEvent, this);
   this.inputEnabled = true;
@@ -79,12 +81,14 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
     var asteroidTextWidth = (this.width * 1.3);
     var style = {
       align: 'center',
+      fontSize: (4 * gameConfig.gameBaseFontSize),
+      fill: 'rgba(255, 255, 255, 1)',
       wordWrap: true,
       wordWrapWidth: asteroidTextWidth,
-      backgroundColor: 'rgba(255, 115, 128, 0)',
-      stroke: 'rgba(255, 243, 244, 0.95)',
-      strokeThickness: 3,
-      fontSize: gameConfig.gameBaseFontSize,
+//
+//       backgroundColor: 'rgba(255, 115, 128, 0)',
+//       stroke: 'rgba(255, 243, 244, 0.95)',
+//       strokeThickness: 3,
     };
     this.textObject = new Phaser.Text(this.game, 0, (this.height * .5), text, style);
     this.textObject.anchor.set(0.5);
@@ -107,7 +111,7 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
     switch(event.eventType) {
       case 'dropNow':
         var beginTween = this.game.add.tween(this)
-          .to({alpha:1}, 2000, Phaser.Easing.Linear.None).start();
+          .to({alpha:1}, 1, Phaser.Easing.Linear.None).start();
 
         beginTween.onComplete.add(function() {
           this.settings.verticalSpeed =  50 + (Math.random() * 20);
@@ -126,14 +130,18 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
           this.alpha = 0;
         } else {
           // fade out
-          var tween = this.game.add.tween(this)
-            .to({alpha: 0}, 1000, Phaser.Easing.Linear.None, true);
+          if (!this.isFading) {
+            this.isFading = true;
 
-          tween.onComplete.add(function() {
-            this.game.eventDispatcher.dispatch({eventType: 'vaporized'});
-            // when done with particles
-            this.destroy();
-          }, this);
+            var tween = this.game.add.tween(this)
+              .to({alpha: 0}, 1, Phaser.Easing.Linear.None, true);
+
+            tween.onComplete.add(function () {
+              this.game.eventDispatcher.dispatch({eventType: 'vaporized'});
+              // when done with particles
+              this.destroy();
+            }, this);
+          }
         }
         break;
 
