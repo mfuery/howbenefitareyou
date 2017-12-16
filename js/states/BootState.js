@@ -53,10 +53,10 @@ BootState.prototype = {
       },
       question: {
         align: 'center',
-        font: '50px Signpainter',
+        font: 'Helvetica',
+        fontSize: 2 * gameBaseFontSize,
         wordWrap: true,
         wordWrapWidth: (game.world.width - 30),
-        stroke: 'rgba(255, 56, 112, 20)',
         fill: 'rgba(255, 243, 244, 0.85)',
         strokeThickness: 3
       }
