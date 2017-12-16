@@ -112,10 +112,15 @@ GameState.prototype = {
     this.scoreText.x = game.world.width;
     this.scoreText.y = game.world.height - this.scoreText.height;
 
+    this.questionText = game.add.text(game.world.centerX, 0, this.questions[this.currentQuestion].question, gameConfig.fontStyles.question);
+    this.questionText.lineSpacing = -this.questionText.fontSize * .5;
+    this.questionText.anchor.x = 0.5;
+
     var numAnswers = this.questions[this.currentQuestion].answers.length;
     var offsetX = ((game.world.width / numAnswers) / 2);
     for (var i = 0; i < numAnswers; i++) {
       this.asteroids.push(new Asteroid(game, {
+        starty: this.questionText.bottom,
         startX: ((this.game.world.width / numAnswers) * i) + offsetX,
         textValue: this.questions[this.currentQuestion].answers[i].text,
         isCorrect: this.questions[this.currentQuestion].answers[i].score
@@ -124,10 +129,6 @@ GameState.prototype = {
       this.cores.push(new Core(game, this.asteroids[i]));
       this.asteroids[i].bringToTop();
     }
-
-    this.questionText = game.add.text(game.world.centerX, 0, this.questions[this.currentQuestion].question, gameConfig.fontStyles.question);
-    this.questionText.lineSpacing = -this.questionText.fontSize * .5;
-    this.questionText.anchor.x = 0.5;
 
     game.eventDispatcher.add(this.handleEvent, this);
 
