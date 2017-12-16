@@ -18,7 +18,7 @@ GameState.prototype = {
   /**
    * The total number of rounds per game.
    */
-  totalQuestions: 10,
+  totalQuestions: 5,
 
   /**
    * Numeric value storing the player's current score.
