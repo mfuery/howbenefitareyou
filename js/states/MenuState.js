@@ -34,17 +34,20 @@ MenuState.prototype = {
     if (this.isResults) {
       titleText = 'Thanks your playing!\nFinal Score: ' + this.score + ' / 10';
     }
-    this.start.title = game.add.text(game.world.centerX, game.world.centerY - (this.start.height * .77), titleText, {
-      font: '30px Signpainter',
-      fill: '#fff'
-    });
+    var startTitleStyle = {
+      align: 'center',
+      font: 'SignPainter',
+      fontSize: (gameConfig.gameBaseFontSize * 3), // 130
+      fontWeight: 'bold',
+      stroke: 'rgba(52, 52, 52, 1)',
+      fill: 'rgba(255, 148, 255, 1)',
+      strokeThickness: 2,
+    };
+    this.start.title = game.add.text(game.world.centerX, game.world.centerY - (this.start.height * .77), titleText, startTitleStyle);
 
     //  Centers the text
     this.start.title.anchor.set(0.5);
     this.start.title.align = 'center';
-
-    this.start.title.fontWeight = 'bold';
-    this.start.title.fontSize = 130;
 
     var grd = this.start.title.context.createLinearGradient(0, 0, 0, this.start.title.height);
 
