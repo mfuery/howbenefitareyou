@@ -215,7 +215,7 @@ GameState.prototype = {
     console.log('UPDATE SCORE');
     this.currentQuestion++;
     this.score += score;
-    this.game.state.clearCurrentState();
+    //this.game.state.clearCurrentState();
     this.game.state.start('game', true, false, this.questions, this.currentQuestion, this.totalQuestions, this.score);
     //this.game.state.restart(true, false, this.questions, this.currentQuestion, this.totalQuestions, this.score);
     //this.game.state.start('transfer', true, false, this.questions, this.currentQuestion, this.totalQuestions, this.score);

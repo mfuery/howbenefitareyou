@@ -64,10 +64,8 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
 
     if (this.isAlive && this.y > game.world.height - (20 * Utils.getGameScaleY())) {
       this.isAlive = false;
-      this.game.eventDispatcher.dispatch({eventType: 'detonate', asteroid: this});
-      // @todo Decide how to move on to the next question if the asteroids hit
-      // the floor.
-      //this.game.eventDispatcher.dispatch({eventType: 'scored', score: 0});
+      //this.game.eventDispatcher.dispatch({eventType: 'detonate', asteroid: this});
+      this.game.eventDispatcher.dispatch({eventType: 'scored', score: 0});
     }
   },
 
