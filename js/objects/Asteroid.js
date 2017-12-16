@@ -90,7 +90,7 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
 //       stroke: 'rgba(255, 243, 244, 0.95)',
 //       strokeThickness: 3,
     };
-    this.textObject = new Phaser.Text(this.game, 0, (this.height * .5), text, style);
+    this.textObject = new Phaser.Text(this.game, 0, 0, text, style);
     this.textObject.anchor.set(0.5);
     //this.textObject.x = this.x;
     //this.textObject.y = this.y;
