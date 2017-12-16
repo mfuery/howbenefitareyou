@@ -81,7 +81,7 @@ Asteroid.prototype = Object.assign(Asteroid.prototype, {
     var asteroidTextWidth = (this.width * 1.3);
     var style = {
       align: 'center',
-      fontSize: (4 * gameConfig.gameBaseFontSize),
+      fontSize: (1000/gameConfig.gameBaseFontSize),
       fill: 'rgba(255, 255, 255, 1)',
       wordWrap: true,
       wordWrapWidth: asteroidTextWidth,
