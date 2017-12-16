@@ -45,6 +45,12 @@ BootState.prototype = {
         stroke: '#000',
         strokeThickness: 10
       },
+      countdown: {
+        font: '100px Courier',
+        fill: '#fff',
+        stroke: '#000',
+        strokeThickness: 10
+      },
       question: {
         align: 'center',
         font: '50px Signpainter',

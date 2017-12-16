@@ -144,8 +144,9 @@ GameState.prototype = {
     }.bind(this), this);
     this.cdTimer.start();
     this.cdText = this.game.add.text(this.game.world.centerX,
-      this.game.world.centerY - (this.game.world.height / 4), '', gameConfig.fontStyles.white);
+      this.game.world.centerY, '', gameConfig.fontStyles.countdown);
     this.cdText.alpha = 1;
+    this.cdText.anchor.setTo(0.5);
 
     // Sounds
     this.sounds.beep = this.game.add.audio('beep-1');
